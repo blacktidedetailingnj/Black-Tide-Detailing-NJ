@@ -65,18 +65,20 @@ export default function HomePage() {
 
           {/* Shield with content */}
           <ShieldHero>
-            <p className="text-metallic text-[10px] sm:text-xs tracking-[0.4em] sm:tracking-[0.5em] uppercase flex items-center gap-2 sm:gap-3">
+            <p className="text-metallic text-xs sm:text-sm tracking-[0.4em] sm:tracking-[0.5em] uppercase flex items-center gap-2 sm:gap-3">
               <span className="block w-5 sm:w-8 h-px bg-metallic/50" />
               Welcome To
               <span className="block w-5 sm:w-8 h-px bg-metallic/50" />
             </p>
 
             <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
-              Black Tide<br />
-              <span className="text-glow">Detailing NJ</span>
+              <span className="bg-gradient-to-t from-[#18B6E6] to-white bg-clip-text text-transparent">
+                Black Tide<br />
+                Detailing NJ
+              </span>
             </h1>
 
-            <p className="text-metallic text-[11px] sm:text-sm tracking-widest uppercase">
+            <p className="text-metallic text-sm sm:text-[0.95rem] tracking-widest uppercase leading-snug max-w-xs sm:max-w-sm">
               Premium Marine Detailing & Ceramic Coating
             </p>
 
@@ -97,7 +99,7 @@ export default function HomePage() {
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Services</h2>
-          <p className="text-metallic mt-4 tracking-wider">Professional marine detailing services, keeping your vessel in pristine condition.</p>
+          <p className="text-glow mt-4 tracking-wider text-base md:text-lg">Professional marine detailing services, keeping your vessel in pristine condition.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
@@ -106,7 +108,7 @@ export default function HomePage() {
               className="bg-brand-blue/30 border border-metallic/20 rounded-2xl p-8 flex flex-col gap-4 hover:border-glow/50 hover:bg-brand-blue/50 transition-all duration-300 group"
             >
               <h3 className="text-lg font-bold uppercase tracking-wider group-hover:text-glow transition-colors">{service.title}</h3>
-              <p className="text-metallic text-sm leading-relaxed">{service.description}</p>
+              <p className="text-metallic text-base leading-relaxed">{service.description}</p>
             </div>
           ))}
         </div>
@@ -117,7 +119,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Work</h2>
-            <p className="text-metallic mt-4 tracking-wider">See our marine detailing transformations</p>
+            <p className="text-glow mt-4 tracking-wider text-base md:text-lg">See our marine detailing transformations</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
