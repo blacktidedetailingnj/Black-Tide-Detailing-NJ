@@ -2,10 +2,9 @@
 
 export default function ShieldHero({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative w-full max-w-2xl -mt-6 flex items-center justify-center">
-      {/* SVG shield — purely decorative, sits behind content */}
+    <div className="relative w-full max-w-[95vw] sm:max-w-xl md:max-w-2xl -mt-6 flex items-center justify-center">
       <svg
-        viewBox="0 0 800 520"
+        viewBox="0 0 800 660"
         xmlns="http://www.w3.org/2000/svg"
         className="absolute inset-0 w-full h-full"
         preserveAspectRatio="xMidYMid meet"
@@ -50,17 +49,17 @@ export default function ShieldHero({ children }: { children: React.ReactNode }) 
 
         {/* Shield fill */}
         <path
-          d="M 40 20 Q 20 20 20 40 L 20 380 L 400 500 L 780 380 L 780 40 Q 780 20 760 20 Z"
+          d="M 40 20 Q 20 20 20 40 L 20 510 L 400 640 L 780 510 L 780 40 Q 780 20 760 20 Z"
           fill="url(#shieldGrad)"
         />
         {/* Bottom shine */}
         <path
-          d="M 20 300 L 20 380 L 400 500 L 780 380 L 780 300 Z"
+          d="M 20 400 L 20 510 L 400 640 L 780 510 L 780 400 Z"
           fill="url(#bottomShine)"
         />
         {/* Outer border */}
         <path
-          d="M 40 20 Q 20 20 20 40 L 20 380 L 400 500 L 780 380 L 780 40 Q 780 20 760 20 Z"
+          d="M 40 20 Q 20 20 20 40 L 20 510 L 400 640 L 780 510 L 780 40 Q 780 20 760 20 Z"
           fill="none"
           stroke="url(#borderGrad)"
           strokeWidth="2.5"
@@ -68,14 +67,14 @@ export default function ShieldHero({ children }: { children: React.ReactNode }) 
         />
         {/* Inner border */}
         <path
-          d="M 52 32 Q 34 32 34 50 L 34 374 L 400 488 L 766 374 L 766 50 Q 766 32 748 32 Z"
+          d="M 52 32 Q 34 32 34 50 L 34 504 L 400 628 L 766 504 L 766 50 Q 766 32 748 32 Z"
           fill="none"
           stroke="rgba(255,255,255,0.06)"
           strokeWidth="1"
         />
         {/* Shiny chevron */}
         <path
-          d="M 200 430 L 400 500 L 600 430"
+          d="M 200 570 L 400 640 L 600 570"
           fill="none"
           stroke="url(#chevronGrad)"
           strokeWidth="2.5"
@@ -83,22 +82,14 @@ export default function ShieldHero({ children }: { children: React.ReactNode }) 
         />
         {/* Inner chevron depth */}
         <path
-          d="M 250 445 L 400 505 L 550 445"
+          d="M 250 585 L 400 645 L 550 585"
           fill="none"
           stroke="rgba(200,205,214,0.2)"
           strokeWidth="1"
         />
       </svg>
 
-      {/*
-        Content layer — sits on top of the SVG in normal HTML flow.
-        Padding mirrors the shield's visual inset:
-          - top/sides: small padding to stay inside the rounded corners
-          - bottom: larger padding so content clears the chevron point
-        Text sizes use responsive Tailwind classes so they scale with
-        the viewport instead of shrinking with the SVG coordinate system.
-      */}
-      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center gap-2 sm:gap-4 px-8 pt-5 pb-16 sm:px-16 sm:pt-10 sm:pb-28">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center gap-1 sm:gap-3 px-[14%] pt-14 pb-[28%] sm:px-[16%] sm:pt-16 sm:pb-[22%] md:pt-20 md:pb-[20%]">
         {children}
       </div>
     </div>

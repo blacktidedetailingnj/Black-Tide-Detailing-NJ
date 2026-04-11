@@ -67,21 +67,27 @@ export default function HomePage() {
                 alt="Black Tide Detailing NJ"
                 width={250}
                 height={250}
-                className="object-contain drop-shadow-2xl w-60 h-60 -mt-16 sm:mt-0 sm:w-60 sm:h-60 md:w-[250px] md:h-[250px]"
+                className="object-contain drop-shadow-2xl w-48 h-48 -mt-16 sm:mt-0 sm:w-56 sm:h-56 md:w-[250px] md:h-[250px]"
               />
             </div>
 
             <ShieldHero>
               <div className="hero-item hero-item-2">
-                <p className="text-metallic text-xs sm:text-sm tracking-[0.4em] sm:tracking-[0.5em] uppercase flex items-center gap-2 sm:gap-3">
-                  <span className="hero-line block w-5 sm:w-8 h-px bg-metallic/50" />
+                <p
+                  className="text-metallic uppercase flex items-center gap-2"
+                  style={{ fontSize: "clamp(0.7rem, 2vw, 0.875rem)", letterSpacing: "0.35em" }}
+                >
+                  <span className="hero-line block w-4 sm:w-6 h-px bg-metallic/50" />
                   Welcome To
-                  <span className="hero-line block w-5 sm:w-8 h-px bg-metallic/50" />
+                  <span className="hero-line block w-4 sm:w-6 h-px bg-metallic/50" />
                 </p>
               </div>
 
               <div className="hero-item hero-item-3">
-                <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+                <h1
+                  className="font-black uppercase tracking-tight leading-none"
+                  style={{ fontSize: "clamp(1.6rem, 5.5vw, 3.75rem)" }}
+                >
                   <span className="bg-gradient-to-t from-[#18B6E6] to-white bg-clip-text text-transparent">
                     Black Tide<br />
                     Detailing NJ
@@ -90,19 +96,30 @@ export default function HomePage() {
               </div>
 
               <div className="hero-item hero-item-4">
-                <p className="text-metallic text-sm sm:text-[0.95rem] tracking-widest uppercase leading-snug max-w-xs sm:max-w-sm">
+                <p
+                  className="text-metallic uppercase leading-snug max-w-[80%] mx-auto"
+                  style={{ fontSize: "clamp(0.7rem, 1.8vw, 0.95rem)", letterSpacing: "0.08em" }}
+                >
                   Premium Marine Detailing & Ceramic Coating
                 </p>
               </div>
 
-              <div className="hero-item hero-item-5 flex flex-col sm:flex-row gap-2 sm:gap-4 mt-1 sm:mt-2">
-                <Link href="/contact" className="hero-btn">
-                  <AppButton variant="primary" size="lg" className="!px-5 !py-2 !text-xs sm:!px-10 sm:!py-3 sm:!text-sm md:!px-14 md:!py-4 md:![font-size:1rem]">
+              <div className="hero-item hero-item-5 flex flex-col md:flex-row gap-2 md:gap-3 mt-1 w-[70%] md:w-full justify-center items-center mx-auto">
+                <Link href="/contact" className="hero-btn w-full md:w-auto">
+                  <AppButton
+                    variant="primary"
+                    size="lg"
+                    className="w-full md:w-auto !px-3 !py-1.5 ![font-size:0.7rem] sm:!px-8 sm:!py-3 sm:!text-sm md:!px-10 md:!py-4 md:![font-size:1rem]"
+                  >
                     Book Now
                   </AppButton>
                 </Link>
-                <Link href="#work" className="hero-btn">
-                  <AppButton variant="outline" size="lg" className="!px-5 !py-2 !text-xs sm:!px-10 sm:!py-3 sm:!text-sm md:!px-14 md:!py-4 md:![font-size:1rem]">
+                <Link href="#work" className="hero-btn w-full md:w-auto">
+                  <AppButton
+                    variant="outline"
+                    size="lg"
+                    className="w-full md:w-auto !px-3 !py-1.5 ![font-size:0.7rem] sm:!px-8 sm:!py-3 sm:!text-sm md:!px-10 md:!py-4 md:![font-size:1rem]"
+                  >
                     Our Work
                   </AppButton>
                 </Link>
@@ -111,7 +128,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SERVICES — slides in from LEFT */}
+        {/* SERVICES */}
         <section className="py-24 px-6 max-w-6xl mx-auto reveal reveal-from-left">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Services</h2>
@@ -134,7 +151,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* GALLERY — slides in from RIGHT */}
+        {/* GALLERY */}
         <section id="work" className="py-24 px-6 bg-secondary/20 reveal reveal-from-right">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
