@@ -6,20 +6,20 @@ import Footer from "@/components/layout/Footer";
 
 const services = [
   {
-    title: "Full Detail",
-    description: "Complete interior and exterior marine detailing from bow to stern.",
+    title: "Service1",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    title: "Ceramic Coating",
-    description: "Long-lasting ceramic protection that repels water, salt, and UV damage.",
+    title: "Service2",
+    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   },
   {
-    title: "Paint Correction",
-    description: "Remove swirls, oxidation, and scratches to restore your hull's shine.",
+    title: "Service3",
+    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   },
   {
-    title: "Maintenance Plans",
-    description: "Scheduled upkeep packages to keep your vessel show-ready all season.",
+    title: "Service4",
+    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/placeholder.png"
+            src="/placeholder2.png"
             alt="Hero background"
             fill
             className="object-cover opacity-70"
@@ -74,8 +74,8 @@ export default function HomePage() {
       {/* SERVICES */}
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-glow text-sm tracking-[0.4em] uppercase mb-3">What We Do</p>
           <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Services</h2>
+          <p className="text-glow mt-4 tracking-wider">Professional marine detailing services, keeping your vessel in pristine condition.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
@@ -94,9 +94,8 @@ export default function HomePage() {
       <section id="work" className="py-24 px-6 bg-secondary/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-glow text-sm tracking-[0.4em] uppercase mb-3">Portfolio</p>
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Work</h2>
-            <p className="text-metallic mt-4 tracking-wider">See our marine detailing transformations</p>
+            <p className="text-glow mt-4 tracking-wider">See our marine detailing transformations</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
