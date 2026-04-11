@@ -53,15 +53,15 @@ export default function NavBar() {
       </div>
 
       {/* Mobile dropdown */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-48" : "max-h-0"}`}>
-        <ul className="flex flex-col items-center gap-6 py-6 border-t border-metallic/20">
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-56" : "max-h-0"}`}>
+        <ul className="flex flex-col items-center gap-6 py-6 px-8 border-t border-metallic/20">
           {links.map((link) => {
             const isActive = pathname === link.href;
             return (
-              <li key={link.href} className="flex flex-col items-center">
+              <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`text-base tracking-widest uppercase transition-colors duration-300 py-2 ${
+                  className={`text-base tracking-widest uppercase transition-colors duration-300 ${
                     isActive
                       ? "text-white font-bold"
                       : "text-white/70 hover:text-glow"
@@ -70,7 +70,6 @@ export default function NavBar() {
                 >
                   {link.label}
                 </Link>
-                <div className={`h-0.5 w-full transition-all duration-300 ${isActive ? "bg-glow" : "bg-transparent"}`} />
               </li>
             );
           })}
