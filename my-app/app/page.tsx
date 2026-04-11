@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AppButton from "@/components/ui/AppButton";
+import ShieldHero from "@/components/ui/ShieldHero";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 
@@ -39,6 +40,7 @@ export default function HomePage() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+        {/* Background photo */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/placeholder2.png"
@@ -50,24 +52,44 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/40 to-base" />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center gap-6 max-w-3xl">
-          <Image src="/logo.png" alt="Black Tide Detailing NJ" width={200} height={200} className="object-contain drop-shadow-2xl" />
-          <p className="text-glow text-sm tracking-[0.4em] uppercase">Welcome to</p>
-          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none">
-            Black Tide<br />
-            <span className="text-glow">Detailing NJ</span>
-          </h1>
-          <p className="text-metallic text-lg tracking-widest uppercase">
-            Premium Marine Detailing & Ceramic Coating
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <Link href="/contact">
-              <AppButton variant="primary" size="lg">Book Now</AppButton>
-            </Link>
-            <Link href="#work">
-              <AppButton variant="outline" size="lg">Our Work</AppButton>
-            </Link>
-          </div>
+        <div className="relative z-10 flex flex-col items-center max-w-3xl w-full">
+
+          {/* Logo */}
+          <Image
+            src="/logo.png"
+            alt="Black Tide Detailing NJ"
+            width={200}
+            height={200}
+            className="object-contain drop-shadow-2xl relative z-10"
+          />
+
+          {/* Shield with content */}
+          <ShieldHero>
+            <p className="text-metallic text-xs tracking-[0.5em] uppercase flex items-center gap-3">
+              <span className="block w-8 h-px bg-metallic/50" />
+              Welcome To
+              <span className="block w-8 h-px bg-metallic/50" />
+            </p>
+
+            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+              Black Tide<br />
+              <span className="text-glow">Detailing NJ</span>
+            </h1>
+
+            <p className="text-metallic text-sm tracking-widest uppercase">
+              Premium Marine Detailing & Ceramic Coating
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mt-2">
+              <Link href="/contact">
+                <AppButton variant="primary" size="lg">Book Now</AppButton>
+              </Link>
+              <Link href="#work">
+                <AppButton variant="outline" size="lg">Our Work</AppButton>
+              </Link>
+            </div>
+          </ShieldHero>
+
         </div>
       </section>
 
@@ -75,7 +97,7 @@ export default function HomePage() {
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Services</h2>
-          <p className="text-glow mt-4 tracking-wider">Professional marine detailing services, keeping your vessel in pristine condition.</p>
+          <p className="text-metallic mt-4 tracking-wider">Professional marine detailing services, keeping your vessel in pristine condition.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
@@ -95,7 +117,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Work</h2>
-            <p className="text-glow mt-4 tracking-wider">See our marine detailing transformations</p>
+            <p className="text-metallic mt-4 tracking-wider">See our marine detailing transformations</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
