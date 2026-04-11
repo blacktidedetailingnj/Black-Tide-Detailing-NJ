@@ -54,38 +54,38 @@ export default function HomePage() {
 
         <div className="relative z-10 flex flex-col items-center max-w-3xl w-full">
 
-          {/* Logo */}
+          {/* Logo — smaller on mobile */}
           <Image
             src="/logo.png"
             alt="Black Tide Detailing NJ"
-            width={200}
-            height={200}
-            className="object-contain drop-shadow-2xl relative z-10"
+            width={250}
+            height={250}
+            className="object-contain drop-shadow-2xl relative z-10 w-60 h-60 -mt-16 sm:mt-0 sm:w-60 sm:h-60 md:w-[250px] md:h-[250px]"
           />
 
           {/* Shield with content */}
           <ShieldHero>
-            <p className="text-metallic text-xs tracking-[0.5em] uppercase flex items-center gap-3">
-              <span className="block w-8 h-px bg-metallic/50" />
+            <p className="text-metallic text-[10px] sm:text-xs tracking-[0.4em] sm:tracking-[0.5em] uppercase flex items-center gap-2 sm:gap-3">
+              <span className="block w-5 sm:w-8 h-px bg-metallic/50" />
               Welcome To
-              <span className="block w-8 h-px bg-metallic/50" />
+              <span className="block w-5 sm:w-8 h-px bg-metallic/50" />
             </p>
 
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+            <h1 className="text-2xl sm:text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
               Black Tide<br />
               <span className="text-glow">Detailing NJ</span>
             </h1>
 
-            <p className="text-metallic text-sm tracking-widest uppercase">
+            <p className="text-metallic text-[11px] sm:text-sm tracking-widest uppercase">
               Premium Marine Detailing & Ceramic Coating
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-1 sm:mt-2">
               <Link href="/contact">
-                <AppButton variant="primary" size="lg">Book Now</AppButton>
+                <AppButton variant="primary" size="lg" className="!px-5 !py-2 !text-xs sm:!px-10 sm:!py-3 sm:!text-sm md:!px-14 md:!py-4 md:![font-size:1rem]">Book Now</AppButton>
               </Link>
               <Link href="#work">
-                <AppButton variant="outline" size="lg">Our Work</AppButton>
+                <AppButton variant="outline" size="lg" className="!px-5 !py-2 !text-xs sm:!px-10 sm:!py-3 sm:!text-sm md:!px-14 md:!py-4 md:![font-size:1rem]">Our Work</AppButton>
               </Link>
             </div>
           </ShieldHero>
@@ -137,20 +137,6 @@ export default function HomePage() {
               <AppButton variant="outline" size="lg">Book Your Detail</AppButton>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* CTA STRIP */}
-      <section className="py-24 px-6 text-center">
-        <div className="max-w-2xl mx-auto flex flex-col items-center gap-6">
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
-            Ready to Make Your<br />
-            <span className="text-glow">Vessel Shine?</span>
-          </h2>
-          <p className="text-metallic tracking-wider">Serving NJ marinas and waterways. Get a free quote today.</p>
-          <Link href="/contact">
-            <AppButton variant="primary" size="lg">Get a Free Quote</AppButton>
-          </Link>
         </div>
       </section>
 

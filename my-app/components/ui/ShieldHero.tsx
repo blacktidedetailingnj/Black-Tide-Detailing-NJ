@@ -1,11 +1,15 @@
+"use client";
+
 export default function ShieldHero({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative w-full max-w-2xl -mt-6">
+    <div className="relative w-full max-w-2xl -mt-6 flex items-center justify-center">
+      {/* SVG shield — purely decorative, sits behind content */}
       <svg
         viewBox="0 0 800 520"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full"
+        className="absolute inset-0 w-full h-full"
         preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
       >
         <defs>
           <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
@@ -84,27 +88,19 @@ export default function ShieldHero({ children }: { children: React.ReactNode }) 
           stroke="rgba(200,205,214,0.2)"
           strokeWidth="1"
         />
-
-        {/* Content rendered inside SVG using foreignObject so it scales with the shield */}
-        <foreignObject x="60" y="30" width="680" height="420">
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "12px",
-              paddingBottom: "32px",
-              paddingLeft: "16px",
-              paddingRight: "16px",
-            }}
-          >
-            {children}
-          </div>
-        </foreignObject>
       </svg>
+
+      {/*
+        Content layer — sits on top of the SVG in normal HTML flow.
+        Padding mirrors the shield's visual inset:
+          - top/sides: small padding to stay inside the rounded corners
+          - bottom: larger padding so content clears the chevron point
+        Text sizes use responsive Tailwind classes so they scale with
+        the viewport instead of shrinking with the SVG coordinate system.
+      */}
+      <div className="relative z-10 w-full flex flex-col items-center justify-center text-center gap-2 sm:gap-4 px-8 pt-5 pb-16 sm:px-16 sm:pt-10 sm:pb-28">
+        {children}
+      </div>
     </div>
   );
 }

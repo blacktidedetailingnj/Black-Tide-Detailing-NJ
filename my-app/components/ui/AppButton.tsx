@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 interface AppButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "outline";
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   onClick?: () => void;
   className?: string;
   href?: string;
@@ -25,6 +25,7 @@ export default function AppButton({
   };
 
   const sizes = {
+    xs: "px-4 py-1.5 text-xs",
     sm: "px-6 py-2 text-sm",
     md: "px-10 py-3 text-sm",
     lg: "px-14 py-4 text-base",
