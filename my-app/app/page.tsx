@@ -60,7 +60,7 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-b from-base/60 via-base/40 to-base" />
           </div>
 
-          <div className="relative z-10 flex flex-col items-center max-w-3xl w-full">
+          <div className="relative z-10 flex flex-col items-center max-w-3xl w-full md:translate-y-8">
             <div className="hero-item hero-item-1">
               <Image
                 src="/logo.png"
