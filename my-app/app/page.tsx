@@ -67,6 +67,7 @@ export default function HomePage() {
                 alt="Black Tide Detailing NJ"
                 width={250}
                 height={250}
+                priority
                 className="object-contain drop-shadow-2xl w-48 h-48 -mt-16 sm:mt-0 sm:w-56 sm:h-56 md:w-[250px] md:h-[250px]"
               />
             </div>
@@ -167,6 +168,7 @@ export default function HomePage() {
                     src={img.src}
                     alt={img.alt}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-glow/0 group-hover:bg-glow/10 transition-all duration-300" />
