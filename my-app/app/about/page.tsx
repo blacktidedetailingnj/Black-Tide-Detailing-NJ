@@ -48,18 +48,18 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-metallic text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.
+              At Blacktide Detailing, our passion for the water runs deep — rooted in family, forged on the water, and brought to the Jersey Shore.
             </p>
           </div>
         </section>
 
-        {/* MISSION */}
+        {/* OUR STORY */}
         <section className="py-24 px-6 reveal reveal-from-right">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
                 src="/placeholder.png"
-                alt="Our mission"
+                alt="Our story — family roots on the water"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -67,39 +67,39 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-tr from-base/40 to-transparent" />
             </div>
             <div className="flex flex-col gap-6">
-              <p className="text-[#18B6E6] uppercase tracking-[0.3em] text-sm font-bold">Our Mission</p>
+              <p className="text-[#18B6E6] uppercase tracking-[0.3em] text-sm font-bold">Our Story</p>
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight leading-tight">
-                Protecting What You've Invested In
+                Born on the Water
               </h2>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Coming from a family of fishermen, some of our earliest memories were made on boats — learning the craft, respecting the ocean, and working side by side restoring vessels with our father. What began as helping out quickly grew into a true passion: bringing life back to worn, weathered boats and experiencing the pride of watching them return to the water.
               </p>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                That feeling never left. Over time, we pursued marine detailing professionally, refining our skills and commitment to quality. Today, we&apos;re proud to bring that same dedication and passion to our new home at the Jersey Shore — honored to serve this community and help fellow boaters protect, restore, and maintain their vessels at the highest standard.
               </p>
             </div>
           </div>
         </section>
 
-        {/* VALUES */}
+        {/* MISSION */}
         <section className="py-24 px-6 bg-secondary/20 reveal reveal-from-left">
           <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-6">
-              <p className="text-[#18B6E6] uppercase tracking-[0.3em] text-sm font-bold">Our Values</p>
+              <p className="text-[#18B6E6] uppercase tracking-[0.3em] text-sm font-bold">Our Mission</p>
               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight leading-tight">
-                Quality in Every Detail
+                Protecting What You&apos;ve<br />Invested In
               </h2>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                At Black Tide Detailing, our mission is to deliver exceptional marine detailing and restorations with precision, integrity, and a deep respect for the water. We are committed to using eco-friendly, marine-safe products that protect both your vessel and the environment.
               </p>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Our goal is to save boat owners time while providing long-lasting results that preserve and enhance the life of every boat we service. As a licensed and trusted business, we take pride in bringing each vessel to its highest potential — restoring beauty, protecting value, and ensuring it stands the test of time.
               </p>
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
                 src="/placeholder.png"
-                alt="Our values"
+                alt="Our mission — restoring boats to their best"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -118,7 +118,7 @@ export default function AboutPage() {
               </span>
             </h2>
             <p className="text-metallic text-lg leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Let us bring your vessel back to life. Get in touch today and experience the Black Tide standard.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center">
               <Link href="/contact">
