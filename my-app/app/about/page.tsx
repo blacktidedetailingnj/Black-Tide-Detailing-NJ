@@ -48,7 +48,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-metallic text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              At Blacktide Detailing, our passion for the water runs deep — rooted in family, forged on the water, and brought to the Jersey Shore.
+              At Black Tide Detailing, our passion for the water runs deep — rooted in family, forged on the water, and brought to the Jersey Shore.
             </p>
           </div>
         </section>
