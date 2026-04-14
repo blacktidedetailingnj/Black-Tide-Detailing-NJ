@@ -95,7 +95,7 @@ export default function AboutPage() {
                 At Black Tide Detailing, our mission is to deliver exceptional marine detailing and restorations with precision, integrity, and a deep respect for the water. We are committed to using eco-friendly, marine-safe products that protect both your vessel and the environment.
               </p>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Our goal is to save boat owners time while providing long-lasting results that preserve and enhance the life of every boat we service. As a licensed and trusted business, we take pride in bringing each vessel to its highest potential — restoring beauty, protecting value, and ensuring it stands the test of time.
+                Our goal is to save boat owners time while providing long-lasting results that preserve and enhance the life of every boat we service. As a licensed and trusted business, we take pride in bringing each vessel to its highest potential by restoring beauty, protecting value, and ensuring it stands the test of time.
               </p>
             </div>
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
