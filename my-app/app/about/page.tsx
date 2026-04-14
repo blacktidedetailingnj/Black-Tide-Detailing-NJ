@@ -50,7 +50,7 @@ export default function AboutPage() {
               </span>
             </h1>
             <p className="text-metallic text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              At Black Tide Detailing, our passion for the water runs deep — rooted in family, forged on the water, and brought to the Jersey Shore.
+              At Black Tide Detailing, our passion for the water runs deep, rooted in family, forged on the water, and brought to the Jersey Shore.
             </p>
           </div>
         </section>
@@ -74,10 +74,10 @@ export default function AboutPage() {
                 Born on the Water
               </h2>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Coming from a family of fishermen, some of our earliest memories were made on boats — learning the craft, respecting the ocean, and working side by side restoring vessels with our father. What began as helping out quickly grew into a true passion: bringing life back to worn, weathered boats and experiencing the pride of watching them return to the water.
+                Coming from a family of fishermen, some of our earliest memories were made on boats, learning the craft, respecting the ocean, and working side by side restoring vessels with our father. What began as helping out quickly grew into a true passion: bringing life back to worn, weathered boats and experiencing the pride of watching them return to the water.
               </p>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                That feeling never left. Over time, we pursued marine detailing professionally, refining our skills and commitment to quality. Today, we&apos;re proud to bring that same dedication and passion to our new home at the Jersey Shore — honored to serve this community and help fellow boaters protect, restore, and maintain their vessels at the highest standard.
+                That feeling never left. Over time, we pursued marine detailing professionally, refining our skills and commitment to quality. Today, we&apos;re proud to bring that same dedication and passion to our new home at the Jersey Shore, honored to serve this community and help fellow boaters protect, restore, and maintain their vessels at the highest standard.
               </p>
             </div>
           </div>
