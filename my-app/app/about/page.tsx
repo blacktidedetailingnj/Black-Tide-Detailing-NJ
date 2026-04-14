@@ -31,14 +31,16 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-base/80 via-base/60 to-base" />
           </div>
           <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <Image
-              src="/logo.png"
-              alt="Black Tide Detailing NJ"
-              width={250}
-              height={250}
-              priority
-              className="object-contain mx-auto mb-6 drop-shadow-2xl"
-            />
+            <Link href="/">
+              <Image
+                src="/logo.png"
+                alt="Black Tide Detailing NJ"
+                width={250}
+                height={250}
+                priority
+                className="object-contain mx-auto mb-6 drop-shadow-2xl cursor-pointer"
+              />
+            </Link>
             <p className="text-metallic uppercase tracking-[0.35em] text-sm mb-4">
               Our Story
             </p>
@@ -108,6 +110,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
 
         {/* CTA */}
         <section className="py-24 px-6 text-center reveal reveal-from-left">

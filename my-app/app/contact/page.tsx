@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import FormField from "@/components/ui/FormField";
@@ -130,13 +131,15 @@ export default function ContactPage() {
 
       {/* Page hero */}
       <section className="pt-16 pb-12 px-6 text-center">
-        <Image
-          src="/logo.png"
-          alt="Black Tide Detailing NJ"
-          width={350}
-          height={350}
-          className="object-contain mx-auto mb-6 drop-shadow-2xl w-40 h-40 sm:w-52 sm:h-52 md:w-[220px] md:h-[220px]"
-        />
+        <Link href="/">
+            <Image
+            src="/logo.png"
+            alt="Black Tide Detailing NJ"
+            width={350}
+            height={350}
+            className="object-contain mx-auto mb-6 drop-shadow-2xl w-40 h-40 sm:w-52 sm:h-52 md:w-[220px] md:h-[220px]"
+            />
+        </Link>
         <p
           className="text-metallic uppercase flex items-center justify-center gap-2 mb-4"
           style={{ fontSize: "clamp(0.65rem, 1.8vw, 0.8rem)", letterSpacing: "0.35em" }}
