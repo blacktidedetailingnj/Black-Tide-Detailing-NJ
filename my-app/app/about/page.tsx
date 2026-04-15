@@ -111,7 +111,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-
         {/* CTA */}
         <section className="py-24 px-6 text-center reveal reveal-from-left">
           <div className="max-w-2xl mx-auto flex flex-col items-center gap-6">
