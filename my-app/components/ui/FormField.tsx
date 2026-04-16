@@ -16,10 +16,12 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
 
     const sharedInputClass = cn(
       // Base
-      "peer w-full bg-transparent pt-5 pb-2 px-4 text-white text-sm tracking-wide",
+      "peer w-full bg-transparent pt-5 pb-2 px-4 text-white text-sm tracking-wide caret-white",
       "border border-white/60 rounded-xl",
       "placeholder-transparent",
       "outline-none transition-all duration-300",
+      // Chrome autofill override
+      "[&:-webkit-autofill]:shadow-[inset_0_0_0_1000px_#0B0F14] [&:-webkit-autofill]:[-webkit-text-fill-color:#ffffff] [&:-webkit-autofill]:border-white/60 [&:-webkit-autofill:focus]:shadow-[inset_0_0_0_1000px_#0B0F14,0_0_0_1px_#18B6E6,0_0_16px_#18B6E640] [&:-webkit-autofill:focus]:border-glow",
       // Focus
       "focus:border-glow focus:shadow-[0_0_0_1px_#18B6E6,0_0_16px_#18B6E640]",
       // Error
