@@ -21,45 +21,56 @@ export async function POST(req: Request) {
 			to: "blacktidedetailingnj@gmail.com",
 			subject: `New Inquiry from ${fullName}`,
 			html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
-          <h2 style="color: #18B6E6; margin-bottom: 24px;">New Service Request</h2>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb;">
 
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold; width: 40%;">Full Name</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee;">${fullName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold;">Phone</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee;">${phone}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold;">Vessel</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee;">${vesselInfo}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold;">Boat Length</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee;">${boatSize}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold;">Vessel Location</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee;">${vesselLocation}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold;">Services Requested</td>
-              <td style="padding: 10px 0; border-bottom: 1px solid #eee;">${services.join(", ")}</td>
-            </tr>
-            ${
-							message
-								? `
-            <tr>
-              <td style="padding: 10px 0; font-weight: bold;">Additional Notes</td>
-              <td style="padding: 10px 0;">${message}</td>
-            </tr>
-            `
-								: ""
-						}
-          </table>
+          <div style="background: #0d1f3c; padding: 24px 28px;">
+            <p style="color: #18B6E6; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 4px;">Black Tide Detailing NJ</p>
+            <p style="color: #ffffff; font-size: 20px; font-weight: 600; margin: 0;">New Service Request</p>
+          </div>
+
+          <div style="padding: 24px 28px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; width: 40%;">Full Name</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${fullName}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Phone</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${phone}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Vessel</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${vesselInfo}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Boat Length</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${boatSize}</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0;">
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Vessel Location</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${vesselLocation}</td>
+              </tr>
+              <tr style="${message ? "border-bottom: 1px solid #f0f0f0;" : ""}">
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Services</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${services.join(", ")}</td>
+              </tr>
+              ${
+								message
+									? `
+              <tr>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Notes</td>
+                <td style="padding: 10px 0; color: #111827; font-weight: 500;">${message}</td>
+              </tr>
+              `
+									: ""
+							}
+            </table>
+          </div>
+
+          <div style="background: #f9fafb; padding: 16px 28px; border-top: 1px solid #f0f0f0;">
+            <p style="color: #9ca3af; font-size: 12px; margin: 0;">Sent from blacktidedetailingnj.com &middot; noreply@blacktidedetailingnj.com</p>
+          </div>
+
         </div>
       `,
 		});

@@ -247,17 +247,29 @@ export default function ContactPage() {
 
           {/* Success state */}
           {submitStatus === "success" && (
-            <div className="mb-8 rounded-2xl border border-glow/40 bg-glow/10 px-6 py-5 flex items-start gap-4 animate-in fade-in duration-500">
-              <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full bg-glow/20 border border-glow/40 flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-glow">
-                  <path d="M2 7l4 4 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-bold tracking-wider uppercase text-sm text-glow">Request Received!</p>
-                <p className="text-metallic text-sm mt-1 leading-relaxed tracking-wide">
-                  Thank you for considering our services. We appreciate your interest and the opportunity to assist you. A member of our mobile detailing team will review your request and contact you shortly to discuss scheduling and availability.
-                </p>
+            <div className="mb-8 rounded-2xl border border-glow/40 bg-glow/10 px-6 py-5 animate-in fade-in duration-500">
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full bg-glow/20 border border-glow/40 flex items-center justify-center">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-glow">
+                    <path d="M2 7l4 4 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <p className="font-bold tracking-wider uppercase text-sm text-glow">Request Received!</p>
+                  <p className="text-white text-sm mt-1 leading-relaxed tracking-wide">
+                    Thank you for considering our services. We appreciate your interest and the opportunity to assist you. A member of our mobile detailing team will review your request and contact you shortly to discuss scheduling and availability.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSubmitStatus("idle")}
+                  className="flex-shrink-0 text-white/40 hover:text-white transition-colors ml-2"
+                  aria-label="Dismiss"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                  </svg>
+                </button>
               </div>
             </div>
           )}
