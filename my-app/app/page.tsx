@@ -11,20 +11,28 @@ import { heroAnimationStyles, scrollRevealStyles } from "@/lib/animationStyles";
 
 const services = [
   {
-    title: "Service1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Wash",
+    description: "A thorough exterior rinse and hand wash to remove salt, grime, and buildup from every outing.",
   },
   {
-    title: "Service2",
-    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    title: "Full Detail",
+    description: "Our complete interior and exterior treatment, restoring your vessel to its best condition inside and out.",
   },
   {
-    title: "Service3",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    title: "Wax / Ceramic",
+    description: "Long-lasting protection against UV, salt, and oxidation. Ceramic coating bonds to your hull for years of deep gloss.",
   },
   {
-    title: "Service4",
-    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    title: "Interior Cleaning",
+    description: "Deep cleaning of cabin, upholstery, carpets, and surfaces leaving the inside as sharp as the outside.",
+  },
+  {
+    title: "Oxidation Removal",
+    description: "We compound and polish away oxidation and faded gelcoat, bringing dull surfaces back to life.",
+  },
+  {
+    title: "Monthly Maintenance",
+    description: "Keep your boat in top shape year-round with a recurring maintenance plan tailored to your schedule.",
   },
 ];
 
@@ -137,7 +145,7 @@ export default function HomePage() {
               Professional marine detailing services, keeping your vessel in pristine condition.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
               <div
                 key={service.title}
