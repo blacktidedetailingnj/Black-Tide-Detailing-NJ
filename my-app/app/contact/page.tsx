@@ -11,9 +11,9 @@ import SelectField from "@/components/ui/SelectField";
 import Image from "next/image";
 
 const SERVICES = [
-  "Wash",
-  "Full Detail",
-  "Wax / Ceramic",
+  "Basic Wash Package",
+  "Full Detail Package",
+  "Wax",
   "Interior Cleaning",
   "Oxidation Removal",
   "Monthly Maintenance",
@@ -349,7 +349,7 @@ export default function ContactPage() {
 
             {/* Vessel Location */}
             <FormField
-              label="Vessel Location"
+              label="Vessel Location (where you would like us to service your boat)"
               id="vesselLocation"
               type="text"
               placeholder="Marina name, dock, or address where we'll service your boat"
