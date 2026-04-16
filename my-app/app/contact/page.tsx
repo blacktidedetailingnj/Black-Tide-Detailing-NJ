@@ -379,11 +379,11 @@ export default function ContactPage() {
             />
 
             {/* Submit */}
-            <div className="pt-2 flex justify-center sm:justify-start">
+            <div className="pt-2">
               <AppButton
                 variant="primary"
                 size="lg"
-                className={submitStatus === "loading" ? "opacity-70 pointer-events-none" : ""}
+                className={`w-full${submitStatus === "loading" ? " opacity-70 pointer-events-none" : ""}`}
               >
                 {submitStatus === "loading" ? (
                   <span className="flex items-center gap-2">
