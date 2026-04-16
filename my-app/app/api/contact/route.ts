@@ -66,34 +66,34 @@ export async function POST(req: Request) {
           <div style="padding: 24px 28px; background: #1e1e1e !important;">
             <table style="width: 100%; border-collapse: collapse;">
               <tr style="border-bottom: 1px solid #2e2e2e;">
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; width: 40%;">Full Name</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; width: 40%;">Full Name</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${fullName}</td>
               </tr>
               <tr style="border-bottom: 1px solid #2e2e2e;">
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Phone</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Phone</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${phone}</td>
               </tr>
               <tr style="border-bottom: 1px solid #2e2e2e;">
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Vessel</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Vessel</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${vesselInfo}</td>
               </tr>
               <tr style="border-bottom: 1px solid #2e2e2e;">
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Boat Length</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Boat Length</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${boatSize}</td>
               </tr>
               <tr style="border-bottom: 1px solid #2e2e2e;">
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Vessel Location</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Vessel Location</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${vesselLocation}</td>
               </tr>
               <tr style="${message ? "border-bottom: 1px solid #2e2e2e;" : ""}">
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Services</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Services</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${services.join(", ")}</td>
               </tr>
               ${
 								message
 									? `
               <tr>
-                <td style="padding: 10px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;">Notes</td>
+                <td style="padding: 10px 0; color: #9ca3af; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Notes</td>
                 <td style="padding: 10px 0; color: #ffffff; font-weight: 500;">${message}</td>
               </tr>
               `
