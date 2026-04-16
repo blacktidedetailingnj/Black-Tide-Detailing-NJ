@@ -6,21 +6,46 @@ import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import FormField from "@/components/ui/FormField";
 import AppButton from "@/components/ui/AppButton";
+import ServiceButton from "@/components/ui/ServiceButton";
+import SelectField from "@/components/ui/SelectField";
 import Image from "next/image";
 
+const SERVICES = [
+  "Wash",
+  "Full Detail",
+  "Wax / Ceramic",
+  "Interior Cleaning",
+  "Oxidation Removal",
+  "Monthly Maintenance",
+];
+
+const BOAT_SIZES = [
+  "Under 20 ft", 
+  "20-24 ft", 
+  "25-29 ft", 
+  "30-34 ft", 
+  "35-39 ft", 
+  "40-49 ft", 
+  "50+ ft"
+];
+
 interface FormData {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   phone: string;
-  email: string;
+  vesselInfo: string;
+  boatSize: string;
+  vesselLocation: string;
+  services: string[];
   message: string;
 }
 
 interface FormErrors {
-  firstName?: string;
-  lastName?: string;
+  fullName?: string;
   phone?: string;
-  email?: string;
+  vesselInfo?: string;
+  boatSize?: string;
+  vesselLocation?: string;
+  services?: string;
   message?: string;
 }
 
@@ -29,16 +54,10 @@ type SubmitStatus = "idle" | "loading" | "success" | "error";
 function validate(data: FormData): FormErrors {
   const errors: FormErrors = {};
 
-  if (!data.firstName.trim()) {
-    errors.firstName = "First name is required.";
-  } else if (data.firstName.trim().length < 2) {
-    errors.firstName = "Must be at least 2 characters.";
-  }
-
-  if (!data.lastName.trim()) {
-    errors.lastName = "Last name is required.";
-  } else if (data.lastName.trim().length < 2) {
-    errors.lastName = "Must be at least 2 characters.";
+  if (!data.fullName.trim()) {
+    errors.fullName = "Full name is required.";
+  } else if (data.fullName.trim().length < 2) {
+    errors.fullName = "Must be at least 2 characters.";
   }
 
   if (!data.phone.trim()) {
@@ -47,16 +66,20 @@ function validate(data: FormData): FormErrors {
     errors.phone = "Enter a valid phone number.";
   }
 
-  if (!data.email.trim()) {
-    errors.email = "Email address is required.";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
-    errors.email = "Enter a valid email address.";
+  if (!data.vesselInfo.trim()) {
+    errors.vesselInfo = "Year, make & model is required.";
   }
 
-  if (!data.message.trim()) {
-    errors.message = "A message is required.";
-  } else if (data.message.trim().length < 10) {
-    errors.message = "Message must be at least 10 characters.";
+  if (!data.boatSize) {
+    errors.boatSize = "Please select a boat length.";
+  }
+
+  if (!data.vesselLocation.trim()) {
+    errors.vesselLocation = "Vessel location is required.";
+  }
+
+  if (data.services.length === 0) {
+    errors.services = "Please select at least one service.";
   }
 
   return errors;
@@ -64,10 +87,12 @@ function validate(data: FormData): FormErrors {
 
 export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     phone: "",
-    email: "",
+    vesselInfo: "",
+    boatSize: "",
+    vesselLocation: "",
+    services: [],
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -79,11 +104,23 @@ export default function ContactPage() {
   ) => {
     const value = e.target.value;
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Re-validate on change if field has been touched
     if (touched[field]) {
       const newErrors = validate({ ...formData, [field]: value });
       setErrors((prev) => ({ ...prev, [field]: newErrors[field] }));
     }
+  };
+
+  const handleServiceToggle = (service: string) => {
+    setFormData((prev) => {
+      const updated = prev.services.includes(service)
+        ? prev.services.filter((s) => s !== service)
+        : [...prev.services, service];
+      if (touched.services) {
+        const newErrors = validate({ ...prev, services: updated });
+        setErrors((e) => ({ ...e, services: newErrors.services }));
+      }
+      return { ...prev, services: updated };
+    });
   };
 
   const handleBlur = (field: keyof FormData) => () => {
@@ -94,9 +131,10 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Touch all fields
-    setTouched({ firstName: true, lastName: true, phone: true, email: true, message: true });
+    setTouched({
+      fullName: true, phone: true, vesselInfo: true,
+      boatSize: true, vesselLocation: true, services: true, message: true,
+    });
 
     const validationErrors = validate(formData);
     setErrors(validationErrors);
@@ -114,7 +152,10 @@ export default function ContactPage() {
 
       if (res.ok) {
         setSubmitStatus("success");
-        setFormData({ firstName: "", lastName: "", phone: "", email: "", message: "" });
+        setFormData({
+          fullName: "", phone: "", vesselInfo: "",
+          boatSize: "", vesselLocation: "", services: [], message: "",
+        });
         setTouched({});
         setErrors({});
       } else {
@@ -132,13 +173,13 @@ export default function ContactPage() {
       {/* Page hero */}
       <section className="pt-16 pb-12 px-6 text-center">
         <Link href="/">
-            <Image
+          <Image
             src="/logo.png"
             alt="Black Tide Detailing NJ"
             width={350}
             height={350}
-            className="object-contain mx-auto mb-6 drop-shadow-2xl w-40 h-40 sm:w-52 sm:h-52 md:w-[220px] md:h-[220px]"
-            />
+            className="object-contain mx-auto mb-6 drop-shadow-2xl w-40 h-40 sm:w-52 sm:h-52 md:w-[220px] md:h-[220px] cursor-pointer"
+          />
         </Link>
         <p
           className="text-metallic uppercase flex items-center justify-center gap-2 mb-4"
@@ -166,6 +207,40 @@ export default function ContactPage() {
         <div className="h-px bg-gradient-to-r from-transparent via-metallic/30 to-transparent" />
       </div>
 
+      {/* Contact info */}
+      <section className="py-5 px-6">
+        <div className="max-w-2xl mx-auto text-center flex flex-col items-center gap-5">
+          <p className="text-white text-sm leading-relaxed">
+            Reach us directly at our email or cell, or fill out the form below and we&apos;ll get back to you shortly.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+            <a
+              href="mailto:blacktidedetailingnj@gmail.com"
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-white/20 hover:border-glow/50 hover:bg-glow/5 transition-all duration-200 group"
+            >
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" className="shrink-0 text-glow">
+                <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
+                <path d="M1.5 4l6.5 5 6.5-5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              </svg>
+              <span className="text-sm text-white/80 group-hover:text-white transition-colors">
+                blacktidedetailingnj@gmail.com
+              </span>
+            </a>
+            <a
+              href="tel:+18488882911"
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-white/20 hover:border-glow/50 hover:bg-glow/5 transition-all duration-200 group"
+            >
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" className="shrink-0 text-glow">
+                <path d="M3 1.5h3l1.5 3.5-1.75 1a8.5 8.5 0 004.25 4.25l1-1.75L14.5 10v3A1.5 1.5 0 0113 14.5C6.1 14.5 1.5 9.9 1.5 3A1.5 1.5 0 013 1.5z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="text-sm">
+                <span className="text-white/80 group-hover:text-white transition-colors">(848) 888-2</span><span className="text-glow">911</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Form section */}
       <section className="py-16 px-6">
         <div className="max-w-2xl mx-auto">
@@ -179,9 +254,9 @@ export default function ContactPage() {
                 </svg>
               </div>
               <div>
-                <p className="font-bold tracking-wider uppercase text-sm text-glow">Message Sent!</p>
-                <p className="text-metallic text-sm mt-1 tracking-wide">
-                  Thanks for reaching out. We&apos;ll get back to you within 24 hours.
+                <p className="font-bold tracking-wider uppercase text-sm text-glow">Request Received!</p>
+                <p className="text-metallic text-sm mt-1 leading-relaxed tracking-wide">
+                  Thank you for considering our services. We appreciate your interest and the opportunity to assist you. A member of our mobile detailing team will review your request and contact you shortly to discuss scheduling and availability.
                 </p>
               </div>
             </div>
@@ -199,7 +274,7 @@ export default function ContactPage() {
               <div>
                 <p className="font-bold tracking-wider uppercase text-sm text-red-400">Something went wrong</p>
                 <p className="text-metallic text-sm mt-1 tracking-wide">
-                  Please try again or email us directly.
+                  Please try again or contact us directly.
                 </p>
               </div>
             </div>
@@ -207,32 +282,18 @@ export default function ContactPage() {
 
           <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
 
-            {/* Name row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {/* Full Name + Phone */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-start">
               <FormField
-                label="First Name"
-                id="firstName"
+                label="Full Name"
+                id="fullName"
                 type="text"
-                autoComplete="given-name"
-                value={formData.firstName}
-                onChange={handleChange("firstName")}
-                onBlur={handleBlur("firstName")}
-                error={touched.firstName ? errors.firstName : undefined}
+                autoComplete="name"
+                value={formData.fullName}
+                onChange={handleChange("fullName")}
+                onBlur={handleBlur("fullName")}
+                error={touched.fullName ? errors.fullName : undefined}
               />
-              <FormField
-                label="Last Name"
-                id="lastName"
-                type="text"
-                autoComplete="family-name"
-                value={formData.lastName}
-                onChange={handleChange("lastName")}
-                onBlur={handleBlur("lastName")}
-                error={touched.lastName ? errors.lastName : undefined}
-              />
-            </div>
-
-            {/* Phone + Email row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <FormField
                 label="Phone Number"
                 id="phone"
@@ -243,28 +304,78 @@ export default function ContactPage() {
                 onBlur={handleBlur("phone")}
                 error={touched.phone ? errors.phone : undefined}
               />
+            </div>
+
+            {/* Year, Make & Model + Boat Length */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-start">
               <FormField
-                label="Email Address"
-                id="email"
-                type="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange("email")}
-                onBlur={handleBlur("email")}
-                error={touched.email ? errors.email : undefined}
+                label="Year, Make & Model of Your Vessel"
+                id="vesselInfo"
+                type="text"
+                placeholder="e.g. 2018 Sea Ray 270"
+                value={formData.vesselInfo}
+                onChange={handleChange("vesselInfo")}
+                onBlur={handleBlur("vesselInfo")}
+                error={touched.vesselInfo ? errors.vesselInfo : undefined}
               />
+              <SelectField
+                id="boatSize"
+                label="Boat Length"
+                value={formData.boatSize}
+                onSelect={(val) => {
+                  setFormData((prev) => ({ ...prev, boatSize: val }));
+                  if (touched.boatSize) {
+                    const errs = validate({ ...formData, boatSize: val });
+                    setErrors((prev) => ({ ...prev, boatSize: errs.boatSize }));
+                  }
+                }}
+                onBlur={handleBlur("boatSize")}
+                error={touched.boatSize ? errors.boatSize : undefined}
+                options={BOAT_SIZES}
+              />
+            </div>
+
+            {/* Vessel Location */}
+            <FormField
+              label="Vessel Location"
+              id="vesselLocation"
+              type="text"
+              placeholder="Marina name, dock, or address where we'll service your boat"
+              value={formData.vesselLocation}
+              onChange={handleChange("vesselLocation")}
+              onBlur={handleBlur("vesselLocation")}
+              error={touched.vesselLocation ? errors.vesselLocation : undefined}
+            />
+
+            {/* Services checkboxes */}
+            <div className="flex flex-col gap-2">
+              <p className="text-xs uppercase tracking-widest text-metallic font-semibold">
+                Service Needed <span className="normal-case tracking-normal">(check all that apply)</span>
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {SERVICES.map((service) => (
+                  <ServiceButton
+                    key={service}
+                    label={service}
+                    checked={formData.services.includes(service)}
+                    onClick={() => handleServiceToggle(service)}
+                  />
+                ))}
+              </div>
+              {touched.services && errors.services && (
+                <p className="text-red-400 text-xs mt-0.5">{errors.services}</p>
+              )}
             </div>
 
             {/* Message */}
             <FormField
-              label="How can we help you?"
+              label="Anything else we should know? (Optional)"
               id="message"
               multiline
-              rows={6}
+              rows={5}
               value={formData.message}
               onChange={handleChange("message")}
               onBlur={handleBlur("message")}
-              error={touched.message ? errors.message : undefined}
             />
 
             {/* Submit */}
