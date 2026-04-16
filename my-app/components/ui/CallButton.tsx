@@ -6,7 +6,7 @@ export default function CallButton() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 200);
+    const handler = () => setScrolled(window.scrollY > 500);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
