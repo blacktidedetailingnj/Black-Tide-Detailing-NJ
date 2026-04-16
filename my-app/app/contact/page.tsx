@@ -37,6 +37,7 @@ interface FormData {
   vesselLocation: string;
   services: string[];
   message: string;
+  boatImage: File | null;
 }
 
 interface FormErrors {
@@ -94,6 +95,7 @@ export default function ContactPage() {
     vesselLocation: "",
     services: [],
     message: "",
+    boatImage: null,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
@@ -106,7 +108,9 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (touched[field]) {
       const newErrors = validate({ ...formData, [field]: value });
-      setErrors((prev) => ({ ...prev, [field]: newErrors[field] }));
+      if (field !== "boatImage") {
+        setErrors((prev) => ({ ...prev, [field as keyof FormErrors]: newErrors[field as keyof FormErrors] }));
+      }
     }
   };
 
@@ -126,7 +130,9 @@ export default function ContactPage() {
   const handleBlur = (field: keyof FormData) => () => {
     setTouched((prev) => ({ ...prev, [field]: true }));
     const newErrors = validate(formData);
-    setErrors((prev) => ({ ...prev, [field]: newErrors[field] }));
+    if (field !== "boatImage") {
+      setErrors((prev) => ({ ...prev, [field as keyof FormErrors]: newErrors[field as keyof FormErrors] }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -144,17 +150,26 @@ export default function ContactPage() {
     setSubmitStatus("loading");
 
     try {
+      const fd = new FormData();
+      fd.append("fullName", formData.fullName);
+      fd.append("phone", formData.phone);
+      fd.append("vesselInfo", formData.vesselInfo);
+      fd.append("boatSize", formData.boatSize);
+      fd.append("vesselLocation", formData.vesselLocation);
+      fd.append("services", JSON.stringify(formData.services));
+      fd.append("message", formData.message);
+      if (formData.boatImage) fd.append("boatImage", formData.boatImage);
+
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: fd,
       });
 
       if (res.ok) {
         setSubmitStatus("success");
         setFormData({
           fullName: "", phone: "", vesselInfo: "",
-          boatSize: "", vesselLocation: "", services: [], message: "",
+          boatSize: "", vesselLocation: "", services: [], message: "", boatImage: null,
         });
         setTouched({});
         setErrors({});
@@ -324,6 +339,63 @@ export default function ContactPage() {
               onBlur={handleBlur("vesselLocation")}
               error={touched.vesselLocation ? errors.vesselLocation : undefined}
             />
+
+            {/* Boat Image Upload */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs uppercase tracking-widest text-metallic font-semibold">
+                Photo of Your Vessel <span className="normal-case tracking-normal text-metallic/50">(Optional)</span>
+              </label>
+              <label
+                htmlFor="boatImage"
+                className={`flex flex-col items-center justify-center gap-2 border rounded-xl px-4 py-6 cursor-pointer transition-all duration-200 ${
+                  formData.boatImage
+                    ? "border-glow/60 bg-glow/5"
+                    : "border-white/20 bg-transparent hover:border-white/40"
+                }`}
+              >
+                {formData.boatImage ? (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-glow">
+                      <path d="M3 17l4-4 3 3 4-6 4 7H3z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+                      <circle cx="6.5" cy="7.5" r="1.5" stroke="currentColor" strokeWidth="1.4" />
+                      <rect x="1" y="1" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1.4" />
+                    </svg>
+                    <span className="text-sm text-white">{formData.boatImage.name}</span>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.preventDefault(); setFormData(prev => ({ ...prev, boatImage: null })); }}
+                      className="text-xs text-metallic/60 hover:text-red-400 transition-colors"
+                    >
+                      Remove
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-metallic/50">
+                      <path d="M10 13V7M7 10l3-3 3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M5 17a4 4 0 01-.5-7.95A5.5 5.5 0 1115.5 10h.5a3 3 0 010 6H5z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
+                    <span className="text-sm text-metallic/60">Click to upload a photo of your vessel</span>
+                    <span className="text-xs text-metallic/40">JPG or PNG · Max 5MB</span>
+                  </>
+                )}
+              </label>
+              <input
+                id="boatImage"
+                type="file"
+                accept="image/jpeg,image/png"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  if (file.size > 5 * 1024 * 1024) {
+                    alert("File size must be under 5MB.");
+                    return;
+                  }
+                  setFormData(prev => ({ ...prev, boatImage: file }));
+                }}
+              />
+            </div>
 
             {/* Services checkboxes */}
             <div className="flex flex-col gap-2">

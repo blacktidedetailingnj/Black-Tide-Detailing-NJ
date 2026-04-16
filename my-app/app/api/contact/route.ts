@@ -5,21 +5,56 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
 	try {
-		const body = await req.json();
-		const {
-			fullName,
-			phone,
-			vesselInfo,
-			boatSize,
-			vesselLocation,
-			services,
-			message,
-		} = body;
+		const fd = await req.formData();
+		const fullName = fd.get("fullName") as string;
+		const phone = fd.get("phone") as string;
+		const vesselInfo = fd.get("vesselInfo") as string;
+		const boatSize = fd.get("boatSize") as string;
+		const vesselLocation = fd.get("vesselLocation") as string;
+		const services: string[] = JSON.parse(fd.get("services") as string);
+		const message = (fd.get("message") as string) || "";
+		const imageFile = fd.get("boatImage") as File | null;
+
+		let imageHtml = "";
+		let attachments: {
+			filename: string;
+			content: Buffer;
+			contentType: string;
+			contentDisposition: "inline";
+			contentId: string;
+		}[] = [];
+
+		if (imageFile && imageFile.size > 0) {
+			const buffer = await imageFile.arrayBuffer();
+			const imageBuffer = Buffer.from(buffer);
+			const mime = imageFile.type || "image/jpeg";
+			const filename = imageFile.name || "vessel.jpg";
+
+			attachments = [
+				{
+					filename,
+					content: imageBuffer,
+					contentType: mime,
+					contentDisposition: "inline",
+					contentId: "vesselphoto",
+				},
+			];
+
+			imageHtml = `
+				<tr>
+					<td colspan="2" style="padding: 20px 0 4px;">
+						<p style="color: #6b7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 10px;">Vessel Photo</p>
+						<img src="cid:vesselphoto" alt="Vessel photo" style="width: 100%; max-width: 540px; border-radius: 8px; display: block;" />
+					</td>
+				</tr>
+			`;
+		}
 
 		await resend.emails.send({
 			from: "Black Tide Detailing <noreply@blacktidedetailingnj.com>",
 			to: "blacktidedetailingnj@gmail.com",
 			subject: `New Inquiry from ${fullName}`,
+			attachments,
 			html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #1e1e1e !important; border-radius: 12px; overflow: hidden; border: 1px solid #333333;">
 
@@ -65,6 +100,7 @@ export async function POST(req: Request) {
 									: ""
 							}
             </table>
+            <table style="width: 100%; border-collapse: collapse;">${imageHtml}</table>
           </div>
 
           <div style="background: #161616 !important; padding: 16px 28px; border-top: 1px solid #2e2e2e;">
