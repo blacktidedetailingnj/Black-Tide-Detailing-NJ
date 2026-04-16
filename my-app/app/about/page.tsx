@@ -124,7 +124,7 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center">
               <Link href="/contact">
-                <AppButton variant="primary" size="lg">Book a Detail</AppButton>
+                <AppButton variant="primary" size="lg">Request a Quote</AppButton>
               </Link>
               <Link href="/">
                 <AppButton variant="outline" size="lg">See Our Work</AppButton>
