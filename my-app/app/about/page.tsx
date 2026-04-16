@@ -74,7 +74,7 @@ export default function AboutPage() {
                 Born on the Water
               </h2>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
-                Coming from a family of fishermen, some of our earliest memories were made on boats, learning the craft, respecting the ocean, and working side by side restoring vessels with our father. What began as helping out quickly grew into a true passion: bringing life back to worn, weathered boats and experiencing the pride of watching them return to the water.
+                Born into a family of fisherman, our story began on the water, learning the craft, respecting the ocean, and working side by side restoring vessels with our father. What began as helping out quickly grew into a true passion: bringing life back to worn, weathered boats and experiencing the pride of watching them return to the water.
               </p>
               <p className="text-metallic leading-relaxed text-base md:text-lg">
                 That feeling never left. Over time, we pursued marine detailing professionally, refining our skills and commitment to quality. Today, we&apos;re proud to bring that same dedication and passion to our new home at the Jersey Shore, honored to serve this community and help fellow boaters protect, restore, and maintain their vessels at the highest standard.
