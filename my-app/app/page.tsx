@@ -11,16 +11,16 @@ import { heroAnimationStyles, scrollRevealStyles } from "@/lib/animationStyles";
 
 const services = [
   {
-    title: "Wash",
+    title: "Basic Wash Package",
     description: "A thorough exterior rinse and hand wash to remove salt, grime, and buildup from every outing.",
   },
   {
-    title: "Full Detail",
+    title: "Full Detail Package (Most Popular)",
     description: "Our complete interior and exterior treatment, restoring your vessel to its best condition inside and out.",
   },
   {
-    title: "Wax / Ceramic",
-    description: "Long-lasting protection against UV, salt, and oxidation. Ceramic coating bonds to your hull for years of deep gloss.",
+    title: "Wax",
+    description: "Long-lasting protection against UV, salt, and oxidation.",
   },
   {
     title: "Interior Cleaning",
@@ -109,7 +109,7 @@ export default function HomePage() {
                   className="text-metallic uppercase leading-snug max-w-[80%] mx-auto"
                   style={{ fontSize: "clamp(0.7rem, 1.8vw, 0.95rem)", letterSpacing: "0.08em" }}
                 >
-                  Premium Marine Detailing & Ceramic Coating
+                  Premium Marine Detailing
                 </p>
               </div>
 
@@ -185,7 +185,7 @@ export default function HomePage() {
             </div>
             <div className="text-center mt-12">
               <Link href="/contact">
-                <AppButton variant="outline" size="lg">Book Your Detail</AppButton>
+                <AppButton variant="outline" size="lg">Request a Quote</AppButton>
               </Link>
             </div>
           </div>
