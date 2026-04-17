@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
@@ -20,13 +20,13 @@ const SERVICES = [
 ];
 
 const BOAT_SIZES = [
-  "Under 20 ft", 
-  "20-24 ft", 
-  "25-29 ft", 
-  "30-34 ft", 
-  "35-39 ft", 
-  "40-49 ft", 
-  "50+ ft"
+  "Under 20 ft",
+  "20-24 ft",
+  "25-29 ft",
+  "30-34 ft",
+  "35-39 ft",
+  "40-49 ft",
+  "50+ ft",
 ];
 
 interface FormData {
@@ -100,6 +100,13 @@ export default function ContactPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const confirmationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (submitStatus === "success" && confirmationRef.current) {
+      confirmationRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [submitStatus]);
 
   const handleChange = (field: keyof FormData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -228,7 +235,10 @@ export default function ContactPage() {
 
           {/* Success state */}
           {submitStatus === "success" && (
-            <div className="mb-8 rounded-2xl border border-glow/40 bg-glow/10 px-6 py-5 animate-in fade-in duration-500">
+            <div
+              ref={confirmationRef}
+              className="mb-8 rounded-2xl border border-glow/40 bg-glow/10 px-6 py-5 animate-in fade-in duration-500"
+            >
               <div className="flex items-start gap-4">
                 <div className="mt-0.5 flex-shrink-0 w-8 h-8 rounded-full bg-glow/20 border border-glow/40 flex items-center justify-center">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-glow">
