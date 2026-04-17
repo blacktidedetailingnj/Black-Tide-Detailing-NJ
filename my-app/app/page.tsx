@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AppButton from "@/components/ui/AppButton";
 import ShieldHero from "@/components/ui/ShieldHero";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import GalleryLightbox from "@/components/ui/GalleryLightbox";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import { heroAnimationStyles, scrollRevealStyles } from "@/lib/animationStyles";
 
@@ -47,6 +49,25 @@ const galleryImages = [
 
 export default function HomePage() {
   useScrollReveal();
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+
+  // Smooth scroll to #work if navigated here with that hash (e.g. from About page)
+  useEffect(() => {
+    if (window.location.hash === "#work") {
+      const el = document.getElementById("work");
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+      }
+    }
+  }, []);
+
+  const handleWorkScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = document.getElementById("work");
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -123,7 +144,7 @@ export default function HomePage() {
                     Book Now
                   </AppButton>
                 </Link>
-                <Link href="#work" className="hero-btn w-full md:w-auto">
+                <a href="#work" onClick={handleWorkScroll} className="hero-btn w-full md:w-auto">
                   <AppButton
                     variant="outline"
                     size="lg"
@@ -131,7 +152,7 @@ export default function HomePage() {
                   >
                     Our Work
                   </AppButton>
-                </Link>
+                </a>
               </div>
             </ShieldHero>
           </div>
@@ -171,7 +192,11 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {galleryImages.map((img, i) => (
-                <div key={i} className="relative aspect-video rounded-xl overflow-hidden group">
+                <div
+                  key={i}
+                  className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer"
+                  onClick={() => setLightboxIndex(i)}
+                >
                   <Image
                     src={img.src}
                     alt={img.alt}
@@ -190,6 +215,14 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* LIGHTBOX */}
+        <GalleryLightbox
+          images={galleryImages}
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(-1)}
+          onNavigate={setLightboxIndex}
+        />
 
         <Footer />
       </main>
