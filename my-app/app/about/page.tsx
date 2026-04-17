@@ -126,7 +126,8 @@ export default function AboutPage() {
               <Link href="/contact">
                 <AppButton variant="primary" size="lg">Request a Quote</AppButton>
               </Link>
-              <Link href="/">
+              {/* /#work navigates to the home page and scrolls to the gallery section */}
+              <Link href="/#work">
                 <AppButton variant="outline" size="lg">See Our Work</AppButton>
               </Link>
             </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AppButton from "@/components/ui/AppButton";
@@ -47,6 +48,25 @@ const galleryImages = [
 
 export default function HomePage() {
   useScrollReveal();
+
+  // Smooth scroll to #work if navigated here with that hash (e.g. from About page)
+  useEffect(() => {
+    if (window.location.hash === "#work") {
+      const el = document.getElementById("work");
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+      }
+    }
+  }, []);
+
+  const handleWorkScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Only intercept if we're already on the home page (no full navigation needed)
+    const el = document.getElementById("work");
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -123,7 +143,8 @@ export default function HomePage() {
                     Book Now
                   </AppButton>
                 </Link>
-                <Link href="#work" className="hero-btn w-full md:w-auto">
+                {/* Smooth scroll to #work section on the same page */}
+                <a href="#work" onClick={handleWorkScroll} className="hero-btn w-full md:w-auto">
                   <AppButton
                     variant="outline"
                     size="lg"
@@ -131,7 +152,7 @@ export default function HomePage() {
                   >
                     Our Work
                   </AppButton>
-                </Link>
+                </a>
               </div>
             </ShieldHero>
           </div>
