@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import AddToHomeScreen from "@/components/ui/AddToHomeScreen";
 
 const links = [
   { label: "Home", href: "/" },
@@ -87,6 +88,11 @@ export default function NavBar() {
             );
           })}
         </ul>
+
+        {/* Mobile: Add to Home Screen */}
+        <div className="px-8 py-6 border-t border-metallic/20 mt-auto">
+          <AddToHomeScreen />
+        </div>
       </div>
     </>
   );
