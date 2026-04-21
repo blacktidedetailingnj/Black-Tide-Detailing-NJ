@@ -25,6 +25,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Black Tide Detailing NJ",
   description: "Black Tide Detailing NJ offers professional mobile marine detailing services at the Jersey Shore. Specializing in boat washing, full detailing, oxidation removal, and interior cleaning. We come to your marina.",
+  icons: {
+    apple: "/logo.png",
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
