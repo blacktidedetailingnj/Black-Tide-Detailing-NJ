@@ -27,8 +27,11 @@ export const metadata: Metadata = {
   title: "Black Tide Detailing NJ",
   description: "Black Tide Detailing NJ offers professional mobile marine detailing services at the Jersey Shore. Specializing in boat washing, full detailing, oxidation removal, and interior cleaning. We come to your marina.",
   icons: {
-    apple: "/logo.png",
-    icon: "/logo.png",
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
   themeColor: "#18B6E6",
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Black Tide Detailing NJ",
     images: [
       {
-        url: "/logo.png",
+        url: "/android-chrome-512x512.png",
         width: 512,
         height: 512,
         alt: "Black Tide Detailing NJ",
@@ -51,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Black Tide Detailing NJ",
     description: "Professional mobile marine detailing services at the Jersey Shore.",
-    images: ["/logo.png"],
+    images: ["/android-chrome-512x512.png"],
   },
 };
 
