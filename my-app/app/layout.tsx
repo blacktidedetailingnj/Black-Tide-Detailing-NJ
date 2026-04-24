@@ -23,16 +23,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.blacktidedetailingnj.com"),
   title: "Black Tide Detailing NJ",
   description: "Black Tide Detailing NJ offers professional mobile marine detailing services at the Jersey Shore. Specializing in boat washing, full detailing, oxidation removal, and interior cleaning. We come to your marina.",
   icons: {
     apple: "/logo.png",
+    icon: "/logo.png",
   },
   manifest: "/manifest.json",
+  themeColor: "#18B6E6",
   openGraph: {
     title: "Black Tide Detailing NJ",
     description: "Professional mobile marine detailing services at the Jersey Shore.",
-    url: "https://www.yourdomain.com",
+    url: "https://www.blacktidedetailingnj.com",
     siteName: "Black Tide Detailing NJ",
     images: [
       {
