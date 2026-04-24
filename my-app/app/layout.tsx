@@ -29,6 +29,27 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   manifest: "/manifest.json",
+  openGraph: {
+    title: "Black Tide Detailing NJ",
+    description: "Professional mobile marine detailing services at the Jersey Shore.",
+    url: "https://www.yourdomain.com",
+    siteName: "Black Tide Detailing NJ",
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Black Tide Detailing NJ",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Black Tide Detailing NJ",
+    description: "Professional mobile marine detailing services at the Jersey Shore.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function RootLayout({
