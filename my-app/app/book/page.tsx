@@ -86,7 +86,7 @@ function validate(data: FormData): FormErrors {
   return errors;
 }
 
-export default function ContactPage() {
+export default function BookPage() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     phone: "",
@@ -167,7 +167,7 @@ export default function ContactPage() {
       fd.append("message", formData.message);
       if (formData.boatImage) fd.append("boatImage", formData.boatImage);
 
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/book", {
         method: "POST",
         body: fd,
       });
@@ -208,7 +208,7 @@ export default function ContactPage() {
           style={{ fontSize: "clamp(0.65rem, 1.8vw, 0.8rem)", letterSpacing: "0.35em" }}
         >
           <span className="block w-6 h-px bg-metallic/50" />
-          Get In Touch
+          Get Started
           <span className="block w-6 h-px bg-metallic/50" />
         </p>
         <h1
@@ -216,11 +216,11 @@ export default function ContactPage() {
           style={{ fontSize: "clamp(2rem, 6vw, 4rem)" }}
         >
           <span className="bg-gradient-to-t from-[#18B6E6] to-white bg-clip-text text-transparent">
-            Contact Us
+            Book With Us
           </span>
         </h1>
         <p className="text-white text-sm tracking-wider max-w-md mx-auto text-[20px]">
-          Ready to give your vessel the care it deserves? Reach out and we&apos;ll be in touch shortly.
+          Ready to give your vessel the care it deserves? Submit the form below and we&apos;ll be in touch shortly.
         </p>
       </section>
 

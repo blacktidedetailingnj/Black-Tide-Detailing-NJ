@@ -53,14 +53,14 @@ export async function POST(req: Request) {
 		await resend.emails.send({
 			from: "Black Tide Detailing <noreply@blacktidedetailingnj.com>",
 			to: "blacktidedetailingnj@gmail.com",
-			subject: `New Inquiry from ${fullName}`,
+			subject: `New Booking Request from ${fullName}`,
 			attachments,
 			html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #1e1e1e !important; border-radius: 12px; overflow: hidden; border: 1px solid #333333;">
 
           <div style="background: #0d1f3c !important; padding: 24px 28px;">
             <p style="color: #18B6E6; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin: 0 0 4px;">Black Tide Detailing NJ</p>
-            <p style="color: #ffffff; font-size: 20px; font-weight: 600; margin: 0;">New Service Request</p>
+            <p style="color: #ffffff; font-size: 20px; font-weight: 600; margin: 0;">New Booking Request</p>
           </div>
 
           <div style="padding: 24px 28px; background: #1e1e1e !important;">

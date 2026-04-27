@@ -8,7 +8,7 @@ import AddToHomeScreen from "@/components/ui/AddToHomeScreen";
 const links = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Book", href: "/book" },
 ];
 
 export default function NavBar() {
