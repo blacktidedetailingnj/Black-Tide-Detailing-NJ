@@ -123,7 +123,7 @@ export default function AboutPage() {
               Let us bring your vessel back to life. Get in touch today and experience the Black Tide standard.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center">
-              <Link href="/contact">
+              <Link href="/book">
                 <AppButton variant="primary" size="lg">Request a Quote</AppButton>
               </Link>
               {/* /#work navigates to the home page and scrolls to the gallery section */}
