@@ -11,6 +11,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.blacktidedetailingnj.com/book</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.blacktidedetailingnj.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

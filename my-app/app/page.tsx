@@ -135,7 +135,7 @@ export default function HomePage() {
               </div>
 
               <div className="hero-item hero-item-5 flex flex-col md:flex-row gap-2 md:gap-3 mt-1 w-[70%] md:w-full justify-center items-center mx-auto">
-                <Link href="/contact" className="hero-btn w-full md:w-auto">
+                <Link href="/book" className="hero-btn w-full md:w-auto">
                   <AppButton
                     variant="primary"
                     size="lg"
@@ -209,7 +209,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="text-center mt-12">
-              <Link href="/contact">
+              <Link href="/book">
                 <AppButton variant="outline" size="lg">Request a Quote</AppButton>
               </Link>
             </div>
