@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import confetti from "canvas-confetti";
 import AppButton from "@/components/ui/AppButton";
 import ShieldHero from "@/components/ui/ShieldHero";
 import NavBar from "@/components/layout/NavBar";
@@ -50,6 +51,39 @@ const galleryImages = [
 export default function HomePage() {
   useScrollReveal();
   const [lightboxIndex, setLightboxIndex] = useState(-1);
+  //////TEMPORARY
+  const [showBirthday, setShowBirthday] = useState(true);
+
+  // Confetti on mount
+  useEffect(() => {
+    const duration = 3000;
+    const end = Date.now() + duration;
+    const colors = ["#18B6E6", "#ffffff", "#ff69b4", "#ffd700"];
+
+    const frame = () => {
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors,
+      });
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors,
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+
+    frame();
+  }, []);
+  //////TEMPORARY
 
   // Smooth scroll to #work if navigated here with that hash (e.g. from About page)
   useEffect(() => {
@@ -72,6 +106,33 @@ export default function HomePage() {
   return (
     <>
       <style>{scrollRevealStyles + heroAnimationStyles}</style>
+      {/** Temporary birthday message **/}
+
+      {showBirthday && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onClick={() => setShowBirthday(false)}
+        >
+          <div
+            className="bg-base border border-metallic/30 rounded-3xl px-10 py-12 flex flex-col items-center gap-4 text-center shadow-2xl max-w-sm mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-5xl">🎂</p>
+            <h2 className="text-3xl font-black uppercase tracking-tight bg-gradient-to-t from-[#18B6E6] to-white bg-clip-text text-transparent">
+              Happy Birthday
+            </h2>
+            <p className="text-2xl font-bold text-white">Guy Rosen</p>
+            <p className="text-metallic text-sm tracking-wider">Wow, what a great Guy!</p>
+            <button
+              onClick={() => setShowBirthday(false)}
+              className="mt-2 px-8 py-2 rounded-full border border-metallic/40 text-metallic text-sm uppercase tracking-widest hover:border-[#18B6E6] hover:text-[#18B6E6] transition-all duration-200"
+            >
+              Incredible Job Uriya!
+            </button>
+          </div>
+        </div>
+      )}
+      {/**TEMPORARY BIRTHDAY MESSAGE*/}
 
       <main className="bg-base text-white min-h-screen">
         <NavBar />
