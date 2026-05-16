@@ -1,10 +1,21 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import ContactCard from "@/components/ui/ContactCard";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with Black Tide Detailing NJ. Call (848) 888-2911, email us, or follow us on Instagram and Facebook. Serving the Jersey Shore.",
+  openGraph: {
+    title: "Contact — Black Tide Detailing NJ",
+    description:
+      "Get in touch with Black Tide Detailing NJ. Call, email, or follow us on social media. Serving the Jersey Shore.",
+    url: "https://www.blacktidedetailingnj.com/contact",
+  },
+};
 
 const CONTACT_ITEMS = [
   {
@@ -74,7 +85,7 @@ export default function ContactPage() {
         <Link href="/">
           <Image
             src="/logo.png"
-            alt="Black Tide Detailing NJ"
+            alt="Black Tide Detailing NJ logo"
             width={350}
             height={350}
             className="object-contain mx-auto mb-6 drop-shadow-2xl w-40 h-40 sm:w-52 sm:h-52 md:w-[220px] md:h-[220px] cursor-pointer"
@@ -97,7 +108,7 @@ export default function ContactPage() {
           </span>
         </h1>
         <p className="text-white text-sm tracking-wider max-w-md mx-auto text-[20px]">
-          Have a question or want to follow us? Reach out through any of the channels below.
+          Have a question or want to book a service? Reach out through any of the channels below.
         </p>
       </section>
 
