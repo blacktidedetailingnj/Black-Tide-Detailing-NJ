@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.blacktidedetailingnj.com"),
   title: {
-    default: "Black Tide Detailing NJ — Professional Marine Detailing at the Jersey Shore",
+    default: "Black Tide Detailing NJ — Jersey Shore Marine Detailing",
     template: "%s — Black Tide Detailing NJ",
   },
   description:
