@@ -58,6 +58,22 @@ const CONTACT_ITEMS = [
     ),
   },
   {
+    label: "TikTok",
+    value: "@blacktide.detaili",
+    href: "https://www.tiktok.com/@blacktide.detaili?_r=1&_t=ZP-97FRajyi2r0",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
     label: "Facebook",
     value: "BlackTide Detailing",
     href: "https://www.facebook.com/people/BlackTide-Detailing/pfbid0d6zH66aJWX4nb9dYsyZtUd8h7FYTfvetfwbxvxUhGHSVyajyozG7EDT7fAGYNw6Tl/",
