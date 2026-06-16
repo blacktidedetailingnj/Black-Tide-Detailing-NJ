@@ -35,6 +35,22 @@ const CONTACT_ITEMS = [
     ),
   },
   {
+    label: "Website",
+    value: "blacktidedetailingnj.com",
+    href: "/",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+        <path
+          d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
     label: "Email",
     value: "blacktidedetailingnj@gmail.com",
     href: "mailto:blacktidedetailingnj@gmail.com",
@@ -59,8 +75,8 @@ const CONTACT_ITEMS = [
   },
   {
     label: "TikTok",
-    value: "@blacktide.detaili",
-    href: "https://www.tiktok.com/@blacktide.detaili?_r=1&_t=ZP-97FRajyi2r0",
+    value: "@blacktidedetailing",
+    href: "https://www.tiktok.com/@blacktidedetailing",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path
