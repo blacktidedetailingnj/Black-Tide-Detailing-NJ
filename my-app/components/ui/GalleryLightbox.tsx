@@ -6,6 +6,8 @@ import Image from "next/image";
 interface GalleryImage {
   src: string;
   alt: string;
+  type?: "image" | "video";
+  aspect?: string;
 }
 
 interface GalleryLightboxProps {
@@ -97,6 +99,10 @@ export default function GalleryLightbox({
   const sideBg = "#0B0F14";
   const panelBg = "#111821";
 
+  const [aw, ah] = (current.aspect || "16/9").split("/").map(Number);
+  const isPortrait = aw / ah < 1;
+  const desktopBoxWidth = isPortrait ? "min(380px, 82vw)" : "min(800px, 88vw)";
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center"
@@ -106,7 +112,7 @@ export default function GalleryLightbox({
 
       {/* ── DESKTOP layout (md+): side buttons outside the image ── */}
       <div
-        className="relative hidden md:flex items-stretch w-full max-w-4xl mx-4"
+        className="relative hidden md:flex items-stretch mx-4"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Left panel */}
@@ -123,21 +129,38 @@ export default function GalleryLightbox({
         </button>
 
         {/* Centre: image + counter */}
-        <div className="relative flex-1 flex flex-col">
+        <div className="relative flex flex-col">
           <div
-            className="relative w-full overflow-hidden border border-white/25"
-            style={{ aspectRatio: "16/9", backgroundColor: panelBg }}
+            className="relative mx-auto overflow-hidden border border-white/25"
+            style={{
+              width: desktopBoxWidth,
+              aspectRatio: current.aspect || "16/9",
+              maxHeight: "78vh",
+              backgroundColor: panelBg,
+            }}
           >
-            <Image
-              key={displayIndex}
-              src={current.src}
-              alt={current.alt}
-              fill
-              sizes="896px"
-              className="object-cover"
-              priority
-              style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
-            />
+            {current.type === "video" ? (
+              <video
+                key={displayIndex}
+                src={current.src}
+                controls
+                playsInline
+                autoPlay
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+              />
+            ) : (
+              <Image
+                key={displayIndex}
+                src={current.src}
+                alt={current.alt}
+                fill
+                sizes="896px"
+                className="object-cover"
+                priority
+                style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+              />
+            )}
           </div>
           <div
             className="flex items-center justify-between px-4 py-2 border-x border-b border-white/5"
@@ -197,18 +220,30 @@ export default function GalleryLightbox({
         {/* Image — edge to edge */}
         <div
           className="relative w-full overflow-hidden border-y border-white/25"
-          style={{ aspectRatio: "16/9", backgroundColor: panelBg }}
+          style={{ aspectRatio: current.aspect || "16/9", maxHeight: "82vh", backgroundColor: panelBg }}
         >
-          <Image
-            key={displayIndex}
-            src={current.src}
-            alt={current.alt}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-            style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
-          />
+          {current.type === "video" ? (
+            <video
+              key={displayIndex}
+              src={current.src}
+              controls
+              playsInline
+              autoPlay
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+            />
+          ) : (
+            <Image
+              key={displayIndex}
+              src={current.src}
+              alt={current.alt}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+              style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+            />
+          )}
 
           {/* Overlaid left button */}
           <button
