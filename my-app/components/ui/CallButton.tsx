@@ -4,12 +4,26 @@ import { useEffect, useState } from "react";
 
 export default function CallButton() {
   const [scrolled, setScrolled] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 500);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  useEffect(() => {
+    const onOpen = () => setLightboxOpen(true);
+    const onClose = () => setLightboxOpen(false);
+    window.addEventListener("lightboxopen", onOpen);
+    window.addEventListener("lightboxclose", onClose);
+    return () => {
+      window.removeEventListener("lightboxopen", onOpen);
+      window.removeEventListener("lightboxclose", onClose);
+    };
+  }, []);
+
+  const condensed = scrolled || lightboxOpen;
 
   return (
     <a
@@ -23,8 +37,8 @@ export default function CallButton() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        height: scrolled ? "44px" : "48px",
-        width: scrolled ? "44px" : "160px",
+        height: condensed ? "44px" : "48px",
+        width: condensed ? "44px" : "160px",
         borderRadius: "9999px",
         backgroundColor: "#18B6E6",
         boxShadow: "0 0 24px #18B6E660",
@@ -33,9 +47,9 @@ export default function CallButton() {
         textDecoration: "none",
         transition: "width 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease",
         WebkitTapHighlightColor: "transparent",
-        gap: scrolled ? "0" : "8px",
-        paddingLeft: scrolled ? "0" : "20px",
-        paddingRight: scrolled ? "0" : "20px",
+        gap: condensed ? "0" : "8px",
+        paddingLeft: condensed ? "0" : "20px",
+        paddingRight: condensed ? "0" : "20px",
       }}
     >
       <svg
@@ -60,8 +74,8 @@ export default function CallButton() {
           fontSize: "11px",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          opacity: scrolled ? 0 : 1,
-          maxWidth: scrolled ? "0px" : "120px",
+          opacity: condensed ? 0 : 1,
+          maxWidth: condensed ? "0px" : "120px",
           overflow: "hidden",
           transition: "opacity 0.2s ease, max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
