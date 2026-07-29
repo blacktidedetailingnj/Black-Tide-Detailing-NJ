@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AppButton from "@/components/ui/AppButton";
@@ -52,9 +52,44 @@ const galleryImages = [
   { src: "/work/Work8.mp4", poster: "/work/Work8-poster.jpg", alt: "Detail 8", type: "video" as const, aspect: "9/16" },
 ];
 
+function useColumnCount() {
+  const [columns, setColumns] = useState(1);
+
+  useEffect(() => {
+    const mqLg = window.matchMedia("(min-width: 1024px)");
+    const mqSm = window.matchMedia("(min-width: 640px)");
+    const update = () => setColumns(mqLg.matches ? 3 : mqSm.matches ? 2 : 1);
+    update();
+    mqLg.addEventListener("change", update);
+    mqSm.addEventListener("change", update);
+    return () => {
+      mqLg.removeEventListener("change", update);
+      mqSm.removeEventListener("change", update);
+    };
+  }, []);
+
+  return columns;
+}
+
 export default function HomePageClient() {
   useScrollReveal();
   const [lightboxIndex, setLightboxIndex] = useState(-1);
+  const columnCount = useColumnCount();
+
+  const galleryColumns = useMemo(() => {
+    const cols: { item: (typeof galleryImages)[number]; index: number }[][] = Array.from(
+      { length: columnCount },
+      () => [],
+    );
+    const heights = new Array(columnCount).fill(0);
+    galleryImages.forEach((item, index) => {
+      const [w, h] = item.aspect.split("/").map(Number);
+      const shortest = heights.indexOf(Math.min(...heights));
+      cols[shortest].push({ item, index });
+      heights[shortest] += h / w;
+    });
+    return cols;
+  }, [columnCount]);
 
   // Smooth scroll to #work if navigated here with that hash (e.g. from About page)
   useEffect(() => {
@@ -193,31 +228,35 @@ export default function HomePageClient() {
               See our detailing transformations
             </p>
           </div>
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
-            {galleryImages.map((img, i) => (
-              <div
-                key={i}
-                className="relative w-full mb-4 break-inside-avoid rounded-xl overflow-hidden group cursor-pointer"
-                style={{ aspectRatio: img.aspect }}
-                onClick={() => setLightboxIndex(i)}
-              >
-                <Image
-                  src={img.poster}
-                  alt={img.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                {img.type === "video" && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
+          <div className="flex gap-4 items-start">
+            {galleryColumns.map((col, ci) => (
+              <div key={ci} className="flex flex-col gap-4 flex-1 min-w-0">
+                {col.map(({ item, index }) => (
+                  <div
+                    key={index}
+                    className="relative w-full rounded-xl overflow-hidden group cursor-pointer"
+                    style={{ aspectRatio: item.aspect }}
+                    onClick={() => setLightboxIndex(index)}
+                  >
+                    <Image
+                      src={item.poster}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {item.type === "video" && (
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-glow/0 group-hover:bg-glow/10 transition-all duration-300" />
                   </div>
-                )}
-                <div className="absolute inset-0 bg-glow/0 group-hover:bg-glow/10 transition-all duration-300" />
+                ))}
               </div>
             ))}
           </div>
