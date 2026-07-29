@@ -42,12 +42,14 @@ const services = [
 ];
 
 const galleryImages = [
-  { src: "/placeholder.png", alt: "Boat detail 1" },
-  { src: "/placeholder.png", alt: "Boat detail 2" },
-  { src: "/placeholder.png", alt: "Boat detail 3" },
-  { src: "/placeholder.png", alt: "Boat detail 4" },
-  { src: "/placeholder.png", alt: "Boat detail 5" },
-  { src: "/placeholder.png", alt: "Boat detail 6" },
+  { src: "/work/Work1.mp4", alt: "Detail 1", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work2.mp4", alt: "Detail 2", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work3.jpeg", alt: "Detail 3", type: "image" as const, aspect: "4/3" },
+  { src: "/work/Work4.jpeg", alt: "Detail 4", type: "image" as const, aspect: "4/3" },
+  { src: "/work/Work5.mp4", alt: "Detail 5", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work6.mp4", alt: "Detail 6", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work7.mp4", alt: "Detail 7", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work8.mp4", alt: "Detail 8", type: "video" as const, aspect: "9/16" },
 ];
 
 export default function HomePageClient() {
@@ -188,23 +190,43 @@ export default function HomePageClient() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">Our Work</h2>
             <p className="text-glow mt-4 tracking-wider text-base md:text-lg">
-              See our marine detailing transformations
+              See our detailing transformations
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
             {galleryImages.map((img, i) => (
               <div
                 key={i}
-                className="relative aspect-video rounded-xl overflow-hidden group cursor-pointer"
+                className="relative w-full mb-4 break-inside-avoid rounded-xl overflow-hidden group cursor-pointer"
+                style={{ aspectRatio: img.aspect }}
                 onClick={() => setLightboxIndex(i)}
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {img.type === "video" ? (
+                  <video
+                    src={img.src}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
+                {img.type === "video" && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-glow/0 group-hover:bg-glow/10 transition-all duration-300" />
               </div>
             ))}
