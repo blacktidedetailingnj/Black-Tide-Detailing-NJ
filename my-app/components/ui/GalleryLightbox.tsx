@@ -18,6 +18,25 @@ interface GalleryLightboxProps {
   onNavigate: (index: number) => void;
 }
 
+function MuteIcon({ muted }: { muted: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      {muted ? (
+        <>
+          <line x1="23" y1="9" x2="17" y2="15" />
+          <line x1="17" y1="9" x2="23" y2="15" />
+        </>
+      ) : (
+        <>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </>
+      )}
+    </svg>
+  );
+}
+
 export default function GalleryLightbox({
   images,
   index,
@@ -29,8 +48,14 @@ export default function GalleryLightbox({
 
   const [displayIndex, setDisplayIndex] = useState(index);
   const [fading, setFading] = useState(false);
+  const [muted, setMuted] = useState(true);
   const fadeDuration = 220;
   const pendingIndex = useRef<number | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMuted(true);
+  }, [displayIndex]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -147,16 +172,27 @@ export default function GalleryLightbox({
             }}
           >
             {current.type === "video" ? (
-              <video
-                key={displayIndex}
-                src={current.src}
-                poster={current.poster}
-                controls
-                playsInline
-                autoPlay
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
-              />
+              <>
+                <video
+                  key={displayIndex}
+                  src={current.src}
+                  poster={current.poster}
+                  playsInline
+                  autoPlay
+                  muted={muted}
+                  loop
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+                />
+                <button
+                  onClick={() => setMuted((m) => !m)}
+                  aria-label={muted ? "Unmute video" : "Mute video"}
+                  className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full text-white hover:text-glow transition-all duration-200"
+                  style={{ backgroundColor: "rgba(11,15,20,0.7)", backdropFilter: "blur(6px)" }}
+                >
+                  <MuteIcon muted={muted} />
+                </button>
+              </>
             ) : (
               <Image
                 key={displayIndex}
@@ -231,16 +267,27 @@ export default function GalleryLightbox({
           style={{ aspectRatio: current.aspect || "16/9", maxHeight: "82vh", backgroundColor: panelBg }}
         >
           {current.type === "video" ? (
-            <video
-              key={displayIndex}
-              src={current.src}
-              poster={current.poster}
-              controls
-              playsInline
-              autoPlay
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
-            />
+            <>
+              <video
+                key={displayIndex}
+                src={current.src}
+                poster={current.poster}
+                playsInline
+                autoPlay
+                muted={muted}
+                loop
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+              />
+              <button
+                onClick={() => setMuted((m) => !m)}
+                aria-label={muted ? "Unmute video" : "Mute video"}
+                className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full text-white transition-all duration-200"
+                style={{ backgroundColor: "rgba(11,15,20,0.7)", backdropFilter: "blur(6px)" }}
+              >
+                <MuteIcon muted={muted} />
+              </button>
+            </>
           ) : (
             <Image
               key={displayIndex}
