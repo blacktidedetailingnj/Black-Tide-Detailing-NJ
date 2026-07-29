@@ -18,23 +18,18 @@ interface GalleryLightboxProps {
   onNavigate: (index: number) => void;
 }
 
-function MuteIcon({ muted }: { muted: boolean }) {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      {muted ? (
-        <>
-          <line x1="23" y1="9" x2="17" y2="15" />
-          <line x1="17" y1="9" x2="23" y2="15" />
-        </>
-      ) : (
-        <>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-        </>
-      )}
-    </svg>
-  );
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return isDesktop;
 }
 
 export default function GalleryLightbox({
@@ -45,17 +40,12 @@ export default function GalleryLightbox({
 }: GalleryLightboxProps) {
   const isOpen = index >= 0;
   const total = images.length;
+  const isDesktop = useIsDesktop();
 
   const [displayIndex, setDisplayIndex] = useState(index);
   const [fading, setFading] = useState(false);
-  const [muted, setMuted] = useState(true);
   const fadeDuration = 220;
   const pendingIndex = useRef<number | null>(null);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMuted(true);
-  }, [displayIndex]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -132,8 +122,7 @@ export default function GalleryLightbox({
   const panelBg = "#111821";
 
   const [aw, ah] = (current.aspect || "16/9").split("/").map(Number);
-  const isPortrait = aw / ah < 1;
-  const desktopBoxWidth = isPortrait ? "min(380px, 82vw)" : "min(800px, 88vw)";
+  const boxWidth = `min(88vw, calc(88vh * ${aw} / ${ah}))`;
 
   return (
     <div
@@ -165,34 +154,22 @@ export default function GalleryLightbox({
           <div
             className="relative mx-auto overflow-hidden border border-white/25"
             style={{
-              width: desktopBoxWidth,
+              width: boxWidth,
               aspectRatio: current.aspect || "16/9",
-              maxHeight: "78vh",
               backgroundColor: panelBg,
             }}
           >
             {current.type === "video" ? (
-              <>
-                <video
-                  key={displayIndex}
-                  src={current.src}
-                  poster={current.poster}
-                  playsInline
-                  autoPlay
-                  muted={muted}
-                  loop
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
-                />
-                <button
-                  onClick={() => setMuted((m) => !m)}
-                  aria-label={muted ? "Unmute video" : "Mute video"}
-                  className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full text-white hover:text-glow transition-all duration-200"
-                  style={{ backgroundColor: "rgba(11,15,20,0.7)", backdropFilter: "blur(6px)" }}
-                >
-                  <MuteIcon muted={muted} />
-                </button>
-              </>
+              <video
+                key={displayIndex}
+                src={current.src}
+                poster={current.poster}
+                controls
+                playsInline
+                autoPlay={isDesktop}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+              />
             ) : (
               <Image
                 key={displayIndex}
@@ -264,30 +241,19 @@ export default function GalleryLightbox({
         {/* Image — edge to edge */}
         <div
           className="relative w-full overflow-hidden border-y border-white/25"
-          style={{ aspectRatio: current.aspect || "16/9", maxHeight: "82vh", backgroundColor: panelBg }}
+          style={{ aspectRatio: current.aspect || "16/9", maxHeight: "88vh", backgroundColor: panelBg }}
         >
           {current.type === "video" ? (
-            <>
-              <video
-                key={displayIndex}
-                src={current.src}
-                poster={current.poster}
-                playsInline
-                autoPlay
-                muted={muted}
-                loop
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
-              />
-              <button
-                onClick={() => setMuted((m) => !m)}
-                aria-label={muted ? "Unmute video" : "Mute video"}
-                className="absolute bottom-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full text-white transition-all duration-200"
-                style={{ backgroundColor: "rgba(11,15,20,0.7)", backdropFilter: "blur(6px)" }}
-              >
-                <MuteIcon muted={muted} />
-              </button>
-            </>
+            <video
+              key={displayIndex}
+              src={current.src}
+              poster={current.poster}
+              controls
+              playsInline
+              autoPlay={!isDesktop}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
+            />
           ) : (
             <Image
               key={displayIndex}
@@ -301,12 +267,15 @@ export default function GalleryLightbox({
             />
           )}
 
-          {/* Overlaid left button */}
+          {/* Overlaid left button — kept clear of the native video control bar */}
           <button
             onClick={goPrev}
             aria-label="Previous image"
-            className="absolute left-0 inset-y-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
-            style={{ background: "linear-gradient(to right, rgba(11,15,20,0.55), transparent)" }}
+            className="absolute left-0 top-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
+            style={{
+              bottom: current.type === "video" ? "52px" : 0,
+              background: "linear-gradient(to right, rgba(11,15,20,0.55), transparent)",
+            }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               className="transition-transform duration-200 group-hover/btn:-translate-x-0.5">
@@ -314,12 +283,15 @@ export default function GalleryLightbox({
             </svg>
           </button>
 
-          {/* Overlaid right button */}
+          {/* Overlaid right button — kept clear of the native video control bar */}
           <button
             onClick={goNext}
             aria-label="Next image"
-            className="absolute right-0 inset-y-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
-            style={{ background: "linear-gradient(to left, rgba(11,15,20,0.55), transparent)" }}
+            className="absolute right-0 top-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
+            style={{
+              bottom: current.type === "video" ? "52px" : 0,
+              background: "linear-gradient(to left, rgba(11,15,20,0.55), transparent)",
+            }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               className="transition-transform duration-200 group-hover/btn:translate-x-0.5">
