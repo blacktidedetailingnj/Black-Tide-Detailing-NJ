@@ -84,12 +84,18 @@ export default function GalleryLightbox({
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = "100%";
     document.body.style.paddingRight = `${scrollbarWidth}px`;
+    window.dispatchEvent(new Event("lightboxopen"));
     return () => {
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.paddingRight = "";
+      const html = document.documentElement;
+      const prevScrollBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
       window.scrollTo(0, scrollY);
+      html.style.scrollBehavior = prevScrollBehavior;
+      window.dispatchEvent(new Event("lightboxclose"));
     };
   }, [isOpen]);
 
@@ -106,7 +112,7 @@ export default function GalleryLightbox({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-[60] flex items-center justify-center"
       style={{ backgroundColor: "rgba(11, 15, 20, 0.95)" }}
       onClick={onClose}
     >
