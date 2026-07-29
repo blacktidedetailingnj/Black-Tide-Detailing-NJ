@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export function useScrollReveal(threshold = 0.15) {
+export function useScrollReveal(threshold = 0) {
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -13,7 +13,7 @@ export function useScrollReveal(threshold = 0.15) {
 					}
 				});
 			},
-			{ threshold },
+			{ threshold, rootMargin: "0px 0px -10% 0px" },
 		);
 
 		const elements = document.querySelectorAll(".reveal");
