@@ -18,6 +18,20 @@ interface GalleryLightboxProps {
   onNavigate: (index: number) => void;
 }
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return isDesktop;
+}
+
 export default function GalleryLightbox({
   images,
   index,
@@ -26,6 +40,7 @@ export default function GalleryLightbox({
 }: GalleryLightboxProps) {
   const isOpen = index >= 0;
   const total = images.length;
+  const isDesktop = useIsDesktop();
 
   const [displayIndex, setDisplayIndex] = useState(index);
   const [fading, setFading] = useState(false);
@@ -107,8 +122,7 @@ export default function GalleryLightbox({
   const panelBg = "#111821";
 
   const [aw, ah] = (current.aspect || "16/9").split("/").map(Number);
-  const isPortrait = aw / ah < 1;
-  const desktopBoxWidth = isPortrait ? "min(380px, 82vw)" : "min(800px, 88vw)";
+  const boxWidth = `min(88vw, calc(88vh * ${aw} / ${ah}))`;
 
   return (
     <div
@@ -140,9 +154,8 @@ export default function GalleryLightbox({
           <div
             className="relative mx-auto overflow-hidden border border-white/25"
             style={{
-              width: desktopBoxWidth,
+              width: boxWidth,
               aspectRatio: current.aspect || "16/9",
-              maxHeight: "78vh",
               backgroundColor: panelBg,
             }}
           >
@@ -153,7 +166,7 @@ export default function GalleryLightbox({
                 poster={current.poster}
                 controls
                 playsInline
-                autoPlay
+                autoPlay={isDesktop}
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
               />
@@ -228,7 +241,7 @@ export default function GalleryLightbox({
         {/* Image — edge to edge */}
         <div
           className="relative w-full overflow-hidden border-y border-white/25"
-          style={{ aspectRatio: current.aspect || "16/9", maxHeight: "82vh", backgroundColor: panelBg }}
+          style={{ aspectRatio: current.aspect || "16/9", maxHeight: "88vh", backgroundColor: panelBg }}
         >
           {current.type === "video" ? (
             <video
@@ -237,7 +250,7 @@ export default function GalleryLightbox({
               poster={current.poster}
               controls
               playsInline
-              autoPlay
+              autoPlay={!isDesktop}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ opacity: fading ? 0 : 1, transition: `opacity ${fadeDuration}ms ease` }}
             />
@@ -254,12 +267,15 @@ export default function GalleryLightbox({
             />
           )}
 
-          {/* Overlaid left button */}
+          {/* Overlaid left button — kept clear of the native video control bar */}
           <button
             onClick={goPrev}
             aria-label="Previous image"
-            className="absolute left-0 inset-y-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
-            style={{ background: "linear-gradient(to right, rgba(11,15,20,0.55), transparent)" }}
+            className="absolute left-0 top-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
+            style={{
+              bottom: current.type === "video" ? "52px" : 0,
+              background: "linear-gradient(to right, rgba(11,15,20,0.55), transparent)",
+            }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               className="transition-transform duration-200 group-hover/btn:-translate-x-0.5">
@@ -267,12 +283,15 @@ export default function GalleryLightbox({
             </svg>
           </button>
 
-          {/* Overlaid right button */}
+          {/* Overlaid right button — kept clear of the native video control bar */}
           <button
             onClick={goNext}
             aria-label="Next image"
-            className="absolute right-0 inset-y-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
-            style={{ background: "linear-gradient(to left, rgba(11,15,20,0.55), transparent)" }}
+            className="absolute right-0 top-0 w-14 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 group/btn"
+            style={{
+              bottom: current.type === "video" ? "52px" : 0,
+              background: "linear-gradient(to left, rgba(11,15,20,0.55), transparent)",
+            }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               className="transition-transform duration-200 group-hover/btn:translate-x-0.5">
