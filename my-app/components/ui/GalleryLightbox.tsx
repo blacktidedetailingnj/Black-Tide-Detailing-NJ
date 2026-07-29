@@ -8,6 +8,7 @@ interface GalleryImage {
   alt: string;
   type?: "image" | "video";
   aspect?: string;
+  poster?: string;
 }
 
 interface GalleryLightboxProps {
@@ -143,6 +144,7 @@ export default function GalleryLightbox({
               <video
                 key={displayIndex}
                 src={current.src}
+                poster={current.poster}
                 controls
                 playsInline
                 autoPlay
@@ -226,6 +228,7 @@ export default function GalleryLightbox({
             <video
               key={displayIndex}
               src={current.src}
+              poster={current.poster}
               controls
               playsInline
               autoPlay

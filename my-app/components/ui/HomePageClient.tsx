@@ -42,14 +42,14 @@ const services = [
 ];
 
 const galleryImages = [
-  { src: "/work/Work1.mp4", alt: "Detail 1", type: "video" as const, aspect: "9/16" },
-  { src: "/work/Work2.mp4", alt: "Detail 2", type: "video" as const, aspect: "9/16" },
-  { src: "/work/Work3.jpeg", alt: "Detail 3", type: "image" as const, aspect: "4/3" },
-  { src: "/work/Work4.jpeg", alt: "Detail 4", type: "image" as const, aspect: "4/3" },
-  { src: "/work/Work5.mp4", alt: "Detail 5", type: "video" as const, aspect: "9/16" },
-  { src: "/work/Work6.mp4", alt: "Detail 6", type: "video" as const, aspect: "9/16" },
-  { src: "/work/Work7.mp4", alt: "Detail 7", type: "video" as const, aspect: "9/16" },
-  { src: "/work/Work8.mp4", alt: "Detail 8", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work1.mp4", poster: "/work/Work1-poster.jpg", alt: "Detail 1", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work2.mp4", poster: "/work/Work2-poster.jpg", alt: "Detail 2", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work3.jpeg", poster: "/work/Work3.jpeg", alt: "Detail 3", type: "image" as const, aspect: "4/3" },
+  { src: "/work/Work4.jpeg", poster: "/work/Work4.jpeg", alt: "Detail 4", type: "image" as const, aspect: "4/3" },
+  { src: "/work/Work5.mp4", poster: "/work/Work5-poster.jpg", alt: "Detail 5", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work6.mp4", poster: "/work/Work6-poster.jpg", alt: "Detail 6", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work7.mp4", poster: "/work/Work7-poster.jpg", alt: "Detail 7", type: "video" as const, aspect: "9/16" },
+  { src: "/work/Work8.mp4", poster: "/work/Work8-poster.jpg", alt: "Detail 8", type: "video" as const, aspect: "9/16" },
 ];
 
 export default function HomePageClient() {
@@ -201,23 +201,13 @@ export default function HomePageClient() {
                 style={{ aspectRatio: img.aspect }}
                 onClick={() => setLightboxIndex(i)}
               >
-                {img.type === "video" ? (
-                  <video
-                    src={img.src}
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                ) : (
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                )}
+                <Image
+                  src={img.poster}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
                 {img.type === "video" && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center">
